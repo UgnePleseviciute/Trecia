@@ -4,13 +4,17 @@
 
 int main() {
     int pazymiu_sk;
-    char temp;
-    std::vector<Studentas> mok;
+    vector<Studentas> mok;
     read_from_file(mok, &pazymiu_sk);
 
-    vector<Studentas> studentai;
-    IsvedimasLenteles(mok) ;
-       char SkaiciavimoBudas;
+    IsvedimasLenteles(mok);
+
+
+
+    return 0;
+}
+
+   /*    char SkaiciavimoBudas;
     char PridetiDarViena;
 
     cout << "Pasirinkite skaiciavimo metoda (V- Vidurkis, M - Mediana): ";
@@ -25,7 +29,7 @@ int main() {
         Studentas studentas;
         studentas.SkaiciavimoBudas = SkaiciavimoBudas;
 
-        StudentoDuomenys(studentas);
+        //StudentoDuomenys(studentas);
         studentai.push_back(studentas);
 
         cout << "Ar nortite prideti dar viena studenta? (T - Taip, N - Ne) ";
@@ -34,10 +38,9 @@ int main() {
 
     cout << "Studentu duomenys ir galutiniai balai:" << endl;
     bool isHeader = true;
-    for (const Studentas& student : studentai) {
+    /*for (const Studentas& student : studentai) {
         Isvedimas(student, isHeader);
         isHeader = false;
     }
+*/
 
-    return 0;
-}
