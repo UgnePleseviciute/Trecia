@@ -1,4 +1,4 @@
-#include "Studentas.h"
+#include "Stu.h"
 
 void StudentoDuomenys(Studentas& studentas) {
     cout << "Iveskite studento varda: ";

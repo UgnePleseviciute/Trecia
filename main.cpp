@@ -1,7 +1,16 @@
-#include "Studentas.h"
+#include "Stu.h"
+
+
+
 int main() {
+    int pazymiu_sk;
+    char temp;
+    std::vector<Studentas> mok;
+    read_from_file(mok, &pazymiu_sk);
+
     vector<Studentas> studentai;
-    char SkaiciavimoBudas;
+    IsvedimasLenteles(mok) ;
+       char SkaiciavimoBudas;
     char PridetiDarViena;
 
     cout << "Pasirinkite skaiciavimo metoda (V- Vidurkis, M - Mediana): ";
@@ -9,7 +18,7 @@ int main() {
 
     if (SkaiciavimoBudas != 'V' && SkaiciavimoBudas != 'v' && SkaiciavimoBudas != 'M' && SkaiciavimoBudas != 'm') {
         cout << "Nesuprantama ivesti, naudosime Vidurki pagal Default." << endl;
-        SkaiciavimoBudas = 'V'; // Default to average
+        SkaiciavimoBudas = 'V';
     }
 
     do {
