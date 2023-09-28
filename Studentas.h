@@ -1,10 +1,11 @@
 #ifndef STUDENTAS_H_INCLUDED
 #define STUDENTAS_H_INCLUDED
 
-#include <string>
 #include <vector>
 #include <iostream>
 #include <iomanip>
+#include <algorithm>
+
 
 using std::cout;
 using std::endl;
@@ -17,11 +18,10 @@ using std::setw;
 using std::fixed;
 using std::setprecision;
 using std::vector;
+using std::sort;
 
 
 
-#include <string>
-#include <vector>
 
 struct Studentas {
     string Vardas;
@@ -29,9 +29,12 @@ struct Studentas {
     vector<int> ND;
     int Egzas;
     double GalutinisB;
+    bool naudotiVidurki;
 };
 
+
 void StudentoDuomenys(Studentas& studentas);
+void PasirinktiVidurkiArMediana();
 double GalutinisBalas(const Studentas& studentas);
 void Isvedimas(const Studentas& studentas, bool isHeader);
 
