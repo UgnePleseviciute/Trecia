@@ -1,4 +1,4 @@
-#include "Studentas.h"
+#include "Stu.h"
 
 void StudentoDuomenys(Studentas& studentas) {
     cout << "Iveskite studento varda: ";
@@ -124,3 +124,4 @@ void Isvedimas(const Studentas& studentas, bool isHeader) {
         cout << setw(20) << fixed << setprecision(2) << GalutinisBalas(studentas) << " |" << endl;
     }
 }
+
