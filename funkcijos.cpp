@@ -29,30 +29,42 @@ void StudentoDuomenys(Studentas& studentas) {
         studentas.Egzas = rand() % 11;
         cout << "\nAtsitiktinai sugeneruotas egzamino rezultatas: " << studentas.Egzas << "\n";
     } else {
-        int NDrez;
-        double totalHomework = 0.0;
-        studentas.ND.clear();
+    int NDrez;
+    double totalHomework = 0.0;
 
-        cout << "Iveskite ND rezultatus (Paspasukite du kartus ENTER kad baigti): ";
-        while (true) {
-            cin >> NDrez;
-            if (cin.peek() == '\n') {
-                cin.ignore();
-                if (cin.peek() == '\n') {
-                    break;
-                }
-            }
-            studentas.ND.push_back(NDrez);
-            totalHomework += NDrez;
+    studentas.ND.clear();
+
+    cout << "Iveskite ND rezultatus (Paspasukite du kartus ENTER kad baigti): ";
+    while (true) {
+        cin >> NDrez;
+
+    // Tikrinu ar tikrai tik sakicius ivede
+        if (cin.fail()) {
+            cin.clear(); // klaida salina
+            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // padaro kad is naujo vesti skaicius
+            cout << "Ivesti netinkami duomenys(raide). Prasome ivesti tik skaicius." << endl;
+            continue; // isnaujo vedame
         }
 
-        cout << "Iveskite egzamino rezultata: ";
-        cin >> studentas.Egzas;
+        if (cin.peek() == '\n') {
+            cin.ignore();
+        if (cin.peek() == '\n') {
+            break;
+        }
+    }
+    studentas.ND.push_back(NDrez);
+    totalHomework += NDrez;
+
+}
+
+cout << "Iveskite egzamino rezultata: ";
+cin >> studentas.Egzas;
+
     }
 }
 
-
 double GalutinisBalas(const Studentas& studentas) {
+
     if (studentas.ND.empty()) {
         return 0.6 * studentas.Egzas;
     }
@@ -60,6 +72,12 @@ double GalutinisBalas(const Studentas& studentas) {
     if (studentas.SkaiciavimoBudas == 'M' || studentas.SkaiciavimoBudas == 'm') {
         vector<int> sortedND = studentas.ND;
         sort(sortedND.begin(), sortedND.end());
+
+        int totalHomework = 0;
+        for (int nd : sortedND) {
+            totalHomework += nd;
+        }
+
         int n = sortedND.size();
         if (n % 2 == 0) {
             int middle1 = sortedND[n / 2 - 1];
@@ -74,6 +92,7 @@ double GalutinisBalas(const Studentas& studentas) {
         for (int nd : studentas.ND) {
             totalHomework += nd;
         }
+
         double GalutinisVidurkis = 0.4 * static_cast<double>(totalHomework) / studentas.ND.size() + 0.6 * studentas.Egzas;
         return GalutinisVidurkis;
     }
