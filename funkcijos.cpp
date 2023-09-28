@@ -11,7 +11,7 @@ void StudentoDuomenys(Studentas& studentas) {
     cout << "Generuoti atsitiktinius pazymius (Taip/Ne)? ";
     cin >> Random;
 
-    if (Random == "taip") {
+    if (Random == "Taip" || Random == "taip" || Random == "t") {
 
         srand(static_cast<unsigned>(time(0)));
 
@@ -28,23 +28,15 @@ void StudentoDuomenys(Studentas& studentas) {
 
         studentas.Egzas = rand() % 11;
         cout << "\nAtsitiktinai sugeneruotas egzamino rezultatas: " << studentas.Egzas << "\n";
-    } else {
-    int NDrez;
-    double totalHomework = 0.0;
+    } else if (Random == "Ne" || Random == "ne" || Random == "n") {
+int NDrez;
+double totalHomework = 0.0;
 
-    studentas.ND.clear();
+studentas.ND.clear();
 
 cout << "Iveskite ND rezultatus (ivedus -1 baigsis ivedimas): ";
 while (true) {
     cin >> NDrez;
-
-    // Tikrinu ar tikrai tik skaicius ivede
-    if (cin.fail()) {
-        cin.clear(); // klaida salina
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // padaro kad is naujo vesti skaicius
-        cout << "Ivesti netinkami duomenys (raide). Prasome ivesti tik skaicius." << endl;
-        continue; // isnaujo vedame
-    }
 
     if (NDrez == -1) {
         char baigimoPasirinkimas;
@@ -53,17 +45,30 @@ while (true) {
         if (baigimoPasirinkimas == 'T' || baigimoPasirinkimas == 't') {
             break; // Baigti ivedima jei ivesta -1 ir patvirtinta
         }
+    } else if (NDrez < 0 || NDrez > 10) {
+        cout << "Netinkamas pazymio formatas. Pazymiai turi būti nuo 0 iki 10." << endl;
+        continue;
+    }
+
+    // Tikrinu ar tikrai tik skaicius ivede
+    if (cin.fail()) {
+        cin.clear(); // klaida salina
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // padaro kad is naujo vesti skaicius
+        cout << "Ivesti netinkami duomenys (raide/simbolis). Prasome ivesti tik skaicius." << endl;
+        continue; // isnaujo vedame
     }
 
     studentas.ND.push_back(NDrez);
     totalHomework += NDrez;
 }
 
-cout << "Iveskite egzamino rezultata: ";
-cin >> studentas.Egzas;
 
+        cout << "Iveskite egzamino rezultata: ";
+        cin >> studentas.Egzas;
     }
 }
+
+
 
 double GalutinisBalas(const Studentas& studentas) {
 

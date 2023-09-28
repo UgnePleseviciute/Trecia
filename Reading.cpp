@@ -18,8 +18,8 @@ void read_from_file(vector<Studentas>& mok, int* pazymiu_sk) {
     fileRead.open(failoPavadinimas);
 
     if (!fileRead.is_open()) {
-    cout << "Failas '" << failoPavadinimas << "' neegzistuoja arba negali buti atidarytas!" << endl;
-    return;
+        cout << "Failas '" << failoPavadinimas << "' neegzistuoja arba negali buti atidarytas!" << endl;
+        return;
 }
 
     if (fileRead.is_open()) {
@@ -79,7 +79,4 @@ void IsvedimasLenteles(const vector<Studentas>& studentai) {
 bool CompareByVardas(const Studentas& a, const Studentas& b) {
     return a.Vardas < b.Vardas;
 }
-
-
-
 
