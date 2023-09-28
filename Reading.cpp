@@ -65,7 +65,9 @@ void IsvedimasLenteles(const vector<Studentas>& studentai) {
     }
 }
 
-
+bool CompareByVardas(const Studentas& a, const Studentas& b) {
+    return a.Vardas < b.Vardas;
+}
 
 
 

@@ -1,5 +1,8 @@
 #include "Stu.h"
 
+
+
+
 int main() {
     int pazymiu_sk;
     vector<Studentas> mok;
@@ -18,6 +21,7 @@ int main() {
         vector<Studentas> mok;
         read_from_file(mok, &pazymiu_sk);
         IsvedimasLenteles(mok);
+        std::sort(mok.begin(), mok.end(), CompareByVardas);
     } else if (pasirinkimas == 2) { //tada vesime viska ranka
 
         cout << "Pasirinkite skaiciavimo metoda (V- Vidurkis, M - Mediana): ";
@@ -39,7 +43,7 @@ int main() {
             cout << "Ar nortite prideti dar viena studenta? (T - Taip, N - Ne) ";
             cin >> PridetiDarViena;
         } while (PridetiDarViena == 'T' || PridetiDarViena == 't');
-
+        std::sort(studentai.begin(), studentai.end(), CompareByVardas);
         cout << "Studentu duomenys ir galutiniai balai:" << endl;
         bool isHeader = true;
         for (const Studentas& student : studentai) {

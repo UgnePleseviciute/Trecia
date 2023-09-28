@@ -52,4 +52,6 @@ void Isvedimas(const Studentas& studentas, bool isHeader);
 void StudentoDuomenys(Studentas& studentas);
 void read_from_file(std::vector<Studentas>& Eil, int* pazymiu_sk);
 void IsvedimasLenteles(const std::vector<Studentas>& studentai);
+bool CompareByVardas(const Studentas& a, const Studentas& b);
+
 #endif
