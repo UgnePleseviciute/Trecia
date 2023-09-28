@@ -1,7 +1,15 @@
 #include "Stu.h"
+#include "Faprasai.h"
 
 int main() {
-    int pazymiu_sk;
+
+    vector<Studentas> studentai; // Studentų sąrašas
+
+    PasirinktiVeiksma(studentai); // Kviečiama funkcija, kurioje vyksta pasirinkimas
+
+    return 0;
+}
+  /*  int pazymiu_sk;
     vector<Studentas> mok;
     vector<Studentas> studentai;
     char SkaiciavimoBudas;
@@ -49,8 +57,8 @@ int main() {
         }
     }
 
-    return 0;
-}
+    return 0;*/
+
 
 
 

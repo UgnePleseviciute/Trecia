@@ -1,4 +1,50 @@
 #include "Stu.h"
+#include "Faprasai.h"
+
+
+void PasirinktiVeiksma(vector<Studentas>& studentai) {
+    char pasirinkimas;
+    cout << "Pasirinkite ka daryti (1 - nuskaityti is failo, 2 - vesti ranka): ";
+    cin >> pasirinkimas;
+
+    if (pasirinkimas == '1') { //nusakito is failiuko
+
+        int pazymiu_sk;
+        vector<Studentas> mok;
+        read_from_file(mok, &pazymiu_sk);
+        IsvedimasLenteles(mok);
+        sort(mok.begin(), mok.end(), CompareByVardas);
+    } else if (pasirinkimas == '2') {  // vesime ranka
+
+        char SkaiciavimoBudas;
+        cout << "Pasirinkite skaiciavimo metoda (V- Vidurkis, M - Mediana): ";
+        cin >> SkaiciavimoBudas;
+
+        if (SkaiciavimoBudas != 'V' && SkaiciavimoBudas != 'v' && SkaiciavimoBudas != 'M' && SkaiciavimoBudas != 'm') {
+            cout << "Nesuprantama ivesti, naudosime Vidurki pagal Defaulta." << endl;
+            SkaiciavimoBudas = 'V';
+        }
+
+        char PridetiDarViena;
+        do {
+            Studentas studentas;
+            studentas.SkaiciavimoBudas = SkaiciavimoBudas;
+            StudentoDuomenys(studentas); // Kviečiama funkcija, kurioje vyksta studento duomenų įvedimas
+            studentai.push_back(studentas);
+
+            cout << "Ar nortite prideti dar viena studenta? (T - Taip, N - Ne) ";
+            cin >> PridetiDarViena;
+        } while (PridetiDarViena == 'T' || PridetiDarViena == 't');
+
+        std::sort(studentai.begin(), studentai.end(), CompareByVardas);
+        cout << "Studentu duomenys ir galutiniai balai:" << endl;
+        bool isHeader = true;
+        for (const Studentas& student : studentai) {
+            Isvedimas(student, isHeader); // Kviečiama funkcija, kuri spausdina duomenis
+            isHeader = false;
+        }
+    }
+}
 
 void StudentoDuomenys(Studentas& studentas) {
     cout << "Iveskite studento varda: ";
@@ -29,37 +75,41 @@ void StudentoDuomenys(Studentas& studentas) {
         studentas.Egzas = rand() % 11;
         cout << "\nAtsitiktinai sugeneruotas egzamino rezultatas: " << studentas.Egzas << "\n";
     } else if (Random == "Ne" || Random == "ne" || Random == "n") {
-int NDrez;
-double totalHomework = 0.0;
+            int NDrez;
+            double totalHomework = 0.0;
 
-studentas.ND.clear();
+            studentas.ND.clear();
 
-cout << "Iveskite ND rezultatus (ivedus -1 baigsis ivedimas): ";
-while (true) {
-    cin >> NDrez;
+        cout << "Iveskite ND rezultatus (ivedus -1 baigsis ivedimas): ";
+    while (true) {
+        cin >> NDrez;
 
-    if (NDrez == -1) {
+        if (NDrez == -1) {
         char baigimoPasirinkimas;
         cout << "Ar tikrai norite baigti ivedima? (T - Taip, N - Ne): ";
         cin >> baigimoPasirinkimas;
         if (baigimoPasirinkimas == 'T' || baigimoPasirinkimas == 't') {
             break; // Baigti ivedima jei ivesta -1 ir patvirtinta
         }
-    } else if (NDrez < 0 || NDrez > 10) {
-        cout << "Netinkamas pazymio formatas. Pazymiai turi būti nuo 0 iki 10." << endl;
-        continue;
-    }
+    } else {
+        try {
+            if (NDrez < 0 || NDrez > 10) {
+                throw invalid_argument("Netinkamas pazymio formatas. Pazymiai turi buti nuo 0 iki 10.");
+            }
+            // Tikrinu ar tikrai tik skaicius ivede
+            if (cin.fail()) {
+                cin.clear(); // klaida salina
+                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // padaro kad is naujo vesti skaicius
+                throw invalid_argument("Ivesti netinkami duomenys (raide/simbolis). Prasau ivesti tik skaicius.");
+            }
 
-    // Tikrinu ar tikrai tik skaicius ivede
-    if (cin.fail()) {
-        cin.clear(); // klaida salina
-        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // padaro kad is naujo vesti skaicius
-        cout << "Ivesti netinkami duomenys (raide/simbolis). Prasome ivesti tik skaicius." << endl;
-        continue; // isnaujo vedame
+            studentas.ND.push_back(NDrez);
+            totalHomework += NDrez;
+        } catch (const invalid_argument& e) {
+            cout << e.what() << endl;
+            continue;
+        }
     }
-
-    studentas.ND.push_back(NDrez);
-    totalHomework += NDrez;
 }
 
 

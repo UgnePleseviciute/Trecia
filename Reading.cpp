@@ -1,9 +1,11 @@
 #include "stu.h"
+#include "Faprasai.h"
+
+
 unsigned int countWordsInString(const string& str) {
     stringstream stream(str);
     return distance(istream_iterator<string>(stream), istream_iterator<string>());
 }
-
 
 void read_from_file(vector<Studentas>& mok, int* pazymiu_sk) {
     int student_counter = 0;
@@ -14,13 +16,12 @@ void read_from_file(vector<Studentas>& mok, int* pazymiu_sk) {
     cout << "Iveskite failo pavadinima: ";
     cin >> failoPavadinimas;
 
+    try {
+        fileRead.open(failoPavadinimas);
 
-    fileRead.open(failoPavadinimas);
-
-    if (!fileRead.is_open()) {
-        cout << "Failas '" << failoPavadinimas << "' neegzistuoja arba negali buti atidarytas!" << endl;
-        return;
-}
+        if (!fileRead.is_open()) {
+            throw invalid_argument("Failas '" + failoPavadinimas + "' neegzistuoja arba negali buti atidarytas!");
+        }
 
     if (fileRead.is_open()) {
         getline(fileRead >> ws, buff);
@@ -40,7 +41,11 @@ void read_from_file(vector<Studentas>& mok, int* pazymiu_sk) {
     }
     else { cout << "Klaida atidarant failą!" << endl; }
     fileRead.close();
+   } catch (const invalid_argument& e) {
+        cout << e.what() << endl;
+   }
 }
+
 float count_vidurkis(const vector<int>& pazymiai) {
     int suma = 0;
     for (int pazymys : pazymiai) {
@@ -62,7 +67,6 @@ float count_median(const vector<int>& pazymiai) {
         return static_cast<float>(sorted_pazymiai[n / 2]);
     }
 }
-
 
 void IsvedimasLenteles(const vector<Studentas>& studentai) {
     cout << left << setw(12) << "Vardas" << " | " << setw(12) << "Pavarde" << " | " << setw(18) << "Galutinis (vid)" << " | " << setw(18) << "Galutinis (med)" << endl;
