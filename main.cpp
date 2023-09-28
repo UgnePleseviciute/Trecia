@@ -9,7 +9,7 @@ int main() {
 
     if (SkaiciavimoBudas != 'V' && SkaiciavimoBudas != 'v' && SkaiciavimoBudas != 'M' && SkaiciavimoBudas != 'm') {
         cout << "Nesuprantama ivesti, naudosime Vidurki pagal Default." << endl;
-        SkaiciavimoBudas = 'V';
+        SkaiciavimoBudas = 'V'; // Default to average
     }
 
     do {

@@ -34,27 +34,29 @@ void StudentoDuomenys(Studentas& studentas) {
 
     studentas.ND.clear();
 
-    cout << "Iveskite ND rezultatus (Paspasukite du kartus ENTER kad baigti): ";
-    while (true) {
-        cin >> NDrez;
+cout << "Iveskite ND rezultatus (ivedus -1 baigsis ivedimas): ";
+while (true) {
+    cin >> NDrez;
 
-    // Tikrinu ar tikrai tik sakicius ivede
-        if (cin.fail()) {
-            cin.clear(); // klaida salina
-            cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // padaro kad is naujo vesti skaicius
-            cout << "Ivesti netinkami duomenys(raide). Prasome ivesti tik skaicius." << endl;
-            continue; // isnaujo vedame
-        }
+    // Tikrinu ar tikrai tik skaicius ivede
+    if (cin.fail()) {
+        cin.clear(); // klaida salina
+        cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // padaro kad is naujo vesti skaicius
+        cout << "Ivesti netinkami duomenys (raide). Prasome ivesti tik skaicius." << endl;
+        continue; // isnaujo vedame
+    }
 
-        if (cin.peek() == '\n') {
-            cin.ignore();
-        if (cin.peek() == '\n') {
-            break;
+    if (NDrez == -1) {
+        char baigimoPasirinkimas;
+        cout << "Ar tikrai norite baigti ivedima? (T - Taip, N - Ne): ";
+        cin >> baigimoPasirinkimas;
+        if (baigimoPasirinkimas == 'T' || baigimoPasirinkimas == 't') {
+            break; // Baigti ivedima jei ivesta -1 ir patvirtinta
         }
     }
+
     studentas.ND.push_back(NDrez);
     totalHomework += NDrez;
-
 }
 
 cout << "Iveskite egzamino rezultata: ";
