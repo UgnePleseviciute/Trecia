@@ -1,10 +1,13 @@
 #ifndef STUDENTAS_H_INCLUDED
 #define STUDENTAS_H_INCLUDED
 
+#include <string>
 #include <vector>
 #include <iostream>
 #include <iomanip>
 #include <algorithm>
+#include <random>
+#include <ctime>
 
 
 using std::cout;
@@ -21,21 +24,18 @@ using std::vector;
 using std::sort;
 
 
-
-
 struct Studentas {
     string Vardas;
     string Pavarde;
     vector<int> ND;
     int Egzas;
     double GalutinisB;
-    bool naudotiVidurki;
+    char SkaiciavimoBudas;
 };
 
 
-void StudentoDuomenys(Studentas& studentas);
-void PasirinktiVidurkiArMediana();
 double GalutinisBalas(const Studentas& studentas);
 void Isvedimas(const Studentas& studentas, bool isHeader);
+void StudentoDuomenys(Studentas& studentas);
 
-#endif // STUDENTAS_H_INCLUDED
+#endif

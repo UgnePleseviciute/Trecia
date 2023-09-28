@@ -1,29 +1,32 @@
-#include "studentas.h"
-
-
+#include "Studentas.h"
 int main() {
     vector<Studentas> studentai;
+    char SkaiciavimoBudas;
+    char PridetiDarViena;
 
-    PasirinktiVidurkiArMediana();;
+    cout << "Pasirinkite skaiciavimo metoda (V- Vidurkis, M - Mediana): ";
+    cin >> SkaiciavimoBudas;
 
-    while (true) {
+    if (SkaiciavimoBudas != 'V' && SkaiciavimoBudas != 'v' && SkaiciavimoBudas != 'M' && SkaiciavimoBudas != 'm') {
+        cout << "Nesuprantama ivesti, naudosime Vidurki pagal Default." << endl;
+        SkaiciavimoBudas = 'V';
+    }
+
+    do {
         Studentas studentas;
+        studentas.SkaiciavimoBudas = SkaiciavimoBudas;
 
         StudentoDuomenys(studentas);
-        studentas.GalutinisB = GalutinisBalas(studentas);
         studentai.push_back(studentas);
-        cout << "Ar norite ivesti dar viena studenta? (taip/ne): ";
-        string pasirinkimas;
-        cin >> pasirinkimas;
-        if (pasirinkimas != "taip") {
-            break;
-        }
-    }
+
+        cout << "Ar nortite prideti dar viena studenta? (T - Taip, N - Ne) ";
+        cin >> PridetiDarViena;
+    } while (PridetiDarViena == 'T' || PridetiDarViena == 't');
+
     cout << "Studentu duomenys ir galutiniai balai:" << endl;
     bool isHeader = true;
     for (const Studentas& student : studentai) {
         Isvedimas(student, isHeader);
-        isHeader = false; // Nenustatome antra karta virsutines eilutes
         isHeader = false;
     }
 
