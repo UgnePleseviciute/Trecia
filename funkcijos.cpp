@@ -118,8 +118,6 @@ void StudentoDuomenys(Studentas& studentas) {
     }
 }
 
-
-
 double GalutinisBalas(const Studentas& studentas) {
 
     if (studentas.ND.empty()) {
@@ -155,8 +153,6 @@ double GalutinisBalas(const Studentas& studentas) {
     }
 }
 
-
-
 void Isvedimas(const Studentas& studentas, bool isHeader) {
     if (isHeader) {
         int tableWidth = 72;
@@ -179,4 +175,3 @@ void Isvedimas(const Studentas& studentas, bool isHeader) {
         cout << setw(20) << fixed << setprecision(2) << GalutinisBalas(studentas) << " |" << endl;
     }
 }
-

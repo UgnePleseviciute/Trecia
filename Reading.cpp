@@ -8,7 +8,7 @@ unsigned int countWordsInString(const string& str) {
 }
 
 void read_from_file(vector<Studentas>& mok, int* pazymiu_sk) {
-    int student_counter = 0;
+    int student_counter = 0; // Counter for the students in the file
     int temp;
     ifstream fileRead;
     string buff;
@@ -23,27 +23,32 @@ void read_from_file(vector<Studentas>& mok, int* pazymiu_sk) {
             throw invalid_argument("Failas '" + failoPavadinimas + "' neegzistuoja arba negali buti atidarytas!");
         }
 
-    if (fileRead.is_open()) {
-        getline(fileRead >> ws, buff);
-        *pazymiu_sk = countWordsInString(buff) - 3;
-        while (true) {
-            mok.resize(mok.size() + 1);
-            fileRead >> mok.at(student_counter).Vardas;
-            if (fileRead.eof()) { mok.pop_back(); break; }
-            fileRead >> mok.at(student_counter).Pavarde;
-            for (int i = 0; i < *pazymiu_sk; i++) {
-                fileRead >> temp;
-                mok.at(student_counter).ND.push_back(temp);
+        if (fileRead.is_open()) {
+            getline(fileRead >> ws, buff);
+            *pazymiu_sk = countWordsInString(buff) - 3;
+            while (true) {
+                mok.resize(mok.size() + 1);
+                fileRead >> mok.at(student_counter).Vardas;
+                if (fileRead.eof()) { break; }
+                fileRead >> mok.at(student_counter).Pavarde;
+                for (int i = 0; i < *pazymiu_sk; i++) {
+                    if (!(fileRead >> temp)) {
+                        cout << "Klaida nuskaitant pazymi " << i + 1 << " studento " << mok.at(student_counter).Vardas << " " << mok.at(student_counter).Pavarde << endl;
+                        mok.pop_back();
+                        break;
+                    }
+                    mok.at(student_counter).ND.push_back(temp);
+                }
+                fileRead >> mok.at(student_counter).Egzas;
+                student_counter++;
             }
-            fileRead >> mok.at(student_counter).Egzas;
-            student_counter++;
+        } else {
+            cout << "Klaida atidarant failą!" << endl;
         }
-    }
-    else { cout << "Klaida atidarant failą!" << endl; }
-    fileRead.close();
-   } catch (const invalid_argument& e) {
+        fileRead.close();
+    } catch (const invalid_argument& e) {
         cout << e.what() << endl;
-   }
+    }
 }
 
 float count_vidurkis(const vector<int>& pazymiai) {
@@ -83,4 +88,3 @@ void IsvedimasLenteles(const vector<Studentas>& studentai) {
 bool CompareByVardas(const Studentas& a, const Studentas& b) {
     return a.Vardas < b.Vardas;
 }
-

@@ -1,6 +1,8 @@
 #include "Stu.h"
 #include "Faprasai.h"
 
+
+
 int main() {
 
     vector<Studentas> studentai; // Studentų sąrašas

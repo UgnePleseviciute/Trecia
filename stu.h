@@ -13,6 +13,9 @@
 #include <fstream>
 #include <iterator>
 #include <stdexcept>
+#include <sstream>
+#include <string> // Include this line for 'to_string'
+#include <stdexcept> // Include this line for 'invalid_argument'
 
 using std::cout;
 using std::endl;
@@ -31,6 +34,10 @@ using std::istream_iterator;
 using std::ifstream;
 using std::ws;
 using std::invalid_argument;
+using std::istringstream;
+using std::to_string;
+using std::cerr;
+using std::ios;
 
 
 struct Studentas {
