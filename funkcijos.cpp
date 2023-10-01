@@ -4,7 +4,7 @@
 
 void PasirinktiVeiksma(vector<Studentas>& studentai) {
     char pasirinkimas;
-    cout << "Pasirinkite ka daryti (1 - nuskaityti is failo, 2 - vesti ranka): ";
+    cout << "Pasirinkite kaip vesime duomenis (1 - nuskaityta bus is failo, 2 - duomenis reiks ivesti ranka): ";
     cin >> pasirinkimas;
 
     if (pasirinkimas == '1') { //nusakito is failiuko
@@ -100,7 +100,7 @@ void StudentoDuomenys(Studentas& studentas) {
             if (cin.fail()) {
                 cin.clear(); // klaida salina
                 cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // padaro kad is naujo vesti skaicius
-                throw invalid_argument("Ivesti netinkami duomenys (raide/simbolis). Prasau ivesti tik skaicius.");
+                throw invalid_argument("Ivesti netinkami duomenys (raide/simbolis). Prasau vesti tik skaicius.");
             }
 
             studentas.ND.push_back(NDrez);

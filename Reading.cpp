@@ -8,7 +8,7 @@ unsigned int countWordsInString(const string& str) {
 }
 
 void read_from_file(vector<Studentas>& mok, int* pazymiu_sk) {
-    int student_counter = 0; // Counter for the students in the file
+    int student_counter = 0;
     int temp;
     ifstream fileRead;
     string buff;
@@ -43,7 +43,7 @@ void read_from_file(vector<Studentas>& mok, int* pazymiu_sk) {
                 student_counter++;
             }
         } else {
-            cout << "Klaida atidarant failą!" << endl;
+            cout << "Klaida atidarant faila!" << endl;
         }
         fileRead.close();
     } catch (const invalid_argument& e) {
