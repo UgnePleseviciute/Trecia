@@ -11,7 +11,6 @@ bool TikrintiFailoTurini(const string& failoPavadinimas);
 void PasirinktiVeiksma(vector<Studentas>& studentai);
 
 void Antrai (vector<Studentas>& studentai);
-void AntrosIsvedimasIFaila (const vector<Studentas>& studentai, char SkaiciavimoBudas, int nd_skaicius, int tableWidth);
-
+void AntrosIsvedimasIAtskirusFailus(const vector<Studentas>& studentai, char SkaiciavimoBudas, int nd_skaicius, int tableWidth, const string& failoPavadinimas);
 
 #endif // FAPRASAI_H_INCLUDED

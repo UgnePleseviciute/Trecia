@@ -1,0 +1,39 @@
+----------------------------------------------------------------------------------------------------
+| Vardas               | Pavarde              | Galutinis (Vid)      |
+----------------------------------------------------------------------------------------------------
+| Vardas1              | Pavarde1             | 5.80                 |
+| Vardas3              | Pavarde3             | 5.80                 |
+| Vardas5              | Pavarde5             | 5.00                 |
+| Vardas6              | Pavarde6             | 6.30                 |
+| Vardas7              | Pavarde7             | 8.60                 |
+| Vardas8              | Pavarde8             | 5.70                 |
+| Vardas9              | Pavarde9             | 5.50                 |
+| Vardas11             | Pavarde11            | 6.00                 |
+| Vardas12             | Pavarde12            | 7.40                 |
+| Vardas14             | Pavarde14            | 7.60                 |
+| Vardas15             | Pavarde15            | 5.40                 |
+| Vardas16             | Pavarde16            | 5.00                 |
+| Vardas18             | Pavarde18            | 5.90                 |
+| Vardas19             | Pavarde19            | 5.00                 |
+| Vardas20             | Pavarde20            | 7.90                 |
+| Vardas26             | Pavarde26            | 6.30                 |
+| Vardas27             | Pavarde27            | 5.10                 |
+| Vardas28             | Pavarde28            | 6.10                 |
+| Vardas29             | Pavarde29            | 6.60                 |
+| Vardas30             | Pavarde30            | 8.50                 |
+| Vardas33             | Pavarde33            | 8.40                 |
+| Vardas34             | Pavarde34            | 5.70                 |
+| Vardas35             | Pavarde35            | 6.90                 |
+| Vardas36             | Pavarde36            | 8.40                 |
+| Vardas37             | Pavarde37            | 6.30                 |
+| Vardas38             | Pavarde38            | 5.70                 |
+| Vardas39             | Pavarde39            | 8.00                 |
+| Vardas40             | Pavarde40            | 7.50                 |
+| Vardas41             | Pavarde41            | 7.30                 |
+| Vardas42             | Pavarde42            | 9.00                 |
+| Vardas43             | Pavarde43            | 7.10                 |
+| Vardas44             | Pavarde44            | 7.90                 |
+| Vardas46             | Pavarde46            | 6.20                 |
+| Vardas48             | Pavarde48            | 5.30                 |
+| Vardas49             | Pavarde49            | 5.80                 |
+| Vardas50             | Pavarde50            | 5.40                 |
