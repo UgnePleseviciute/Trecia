@@ -46,44 +46,10 @@ void PasirinktiVeiksma(vector<Studentas>& studentai) {
         }
     }
     else if (pasirinkimas == '3') {
-
-    int StudKiekis;
-    cout << "Iveskite studentu kieki: ";
-    cin >> StudKiekis;
-
-    int nd_skaicius;
-    cout << "Iveskite ND pazymiu skaiciu: ";
-    cin >> nd_skaicius;
-
-    for (int i = 1; i <= StudKiekis; ++i) {
-        string vardas = "Vardas" + to_string(i);
-        string pavarde = "Pavarde" + to_string(i);
-    }
-
-    cout << "Automatiskai sugeneruoti studentai:" << endl;
-    cout << "| "  << left << setw(10) << "Vardas" << " | " << left << setw(10) << "Pavarde" << " | ";
-    for (int i = 1; i <= nd_skaicius; ++i) {
-            cout  << "ND" << i << " | ";
-    }
-        cout  << endl;
-        cout << "------------------------------------------------------------" << endl;
-
-        for (int i = 1; i <= StudKiekis; ++i) {
-        string vardas = "Vardas" + to_string(i);
-        string pavarde = "Pavarde" + to_string(i);
-
-        cout << "| " << left << setw(10) << vardas << " | " << left << setw(10) << pavarde;
-        for (int j = 1; j <= nd_skaicius; ++j) {
-            int nd_pazymys = rand() % 10 + 1; // Atsitiktinis ND pazymys nuo 1 iki 10
-            cout  << setw(5) << fixed <<  " |" << nd_pazymys;
-        }
-        cout << endl;
-    }
-
+         Antrai(studentai);
 
     }
 }
-
 void StudentoDuomenys(Studentas& studentas) {
     cout << "Iveskite studento varda: ";
     cin >> studentas.Vardas;

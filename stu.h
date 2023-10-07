@@ -16,6 +16,7 @@
 #include <sstream>
 #include <string> // Include this line for 'to_string'
 #include <stdexcept> // Include this line for 'invalid_argument'
+#
 
 using std::cout;
 using std::endl;
@@ -43,6 +44,7 @@ using std::numeric_limits;
 //antrai
 using std::srand;
 using std::random_shuffle;
+using std::ofstream;
 
 struct Studentas {
     string Vardas;
