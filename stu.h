@@ -1,7 +1,6 @@
 #ifndef STU_H_INCLUDED
 #define STU_H_INCLUDED
 
-#include <string>
 #include <vector>
 #include <iostream>
 #include <iomanip>
@@ -13,9 +12,7 @@
 #include <fstream>
 #include <iterator>
 #include <stdexcept>
-#include <sstream>
 #include <string> 
-#include <stdexcept> 
 
 using std::cout;
 using std::endl;
@@ -38,7 +35,8 @@ using std::istringstream;
 using std::to_string;
 using std::cerr;
 using std::ios;
-
+using std::streamsize;
+using std::numeric_limits;
 
 struct Studentas {
     string Vardas;
