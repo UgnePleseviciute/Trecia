@@ -99,7 +99,7 @@ void StudentoDuomenys(Studentas& studentas) {
             // Tikrinu ar tikrai tik skaicius ivede
             if (cin.fail()) {
                 cin.clear(); // klaida salina
-                cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n'); // padaro kad is naujo vesti skaicius
+                cin.ignore(numeric_limits<streamsize>::max(), '\n'); // padaro kad is naujo vesti skaicius
                 throw invalid_argument("Ivesti netinkami duomenys (raide/simbolis). Prasau vesti tik skaicius.");
             }
 
