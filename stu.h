@@ -14,8 +14,8 @@
 #include <iterator>
 #include <stdexcept>
 #include <sstream>
-#include <string> 
-#include <stdexcept> 
+#include <string> // Include this line for 'to_string'
+#include <stdexcept> // Include this line for 'invalid_argument'
 
 using std::cout;
 using std::endl;
@@ -38,7 +38,11 @@ using std::istringstream;
 using std::to_string;
 using std::cerr;
 using std::ios;
-
+using std::streamsize;
+using std::numeric_limits;
+//antrai
+using std::srand;
+using std::random_shuffle;
 
 struct Studentas {
     string Vardas;
