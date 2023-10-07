@@ -58,7 +58,8 @@ for (int i = 1; i <= StudKiekis; ++i) {
             cout << setw(20) << fixed << setprecision(2) << GalutinisBalas(studentas) << " |" << endl;
         }
     }*/
-        ofstream outFile("rezultatai.txt");
+        string FailoPav = "rezultatai_" + to_string(StudKiekis) + ".txt";
+        ofstream outFile(FailoPav);
 
     if (outFile.is_open()) {
         outFile << string(tableWidth, '-') << endl;
@@ -93,8 +94,8 @@ for (int i = 1; i <= StudKiekis; ++i) {
         }
 
         outFile.close();
-        cout << "Duomenys isvesti i faila rezultatai.txt" << endl;
+        cout << "Duomenys isvesti i faila " << FailoPav << endl;
     } else {
-        cout << "Nepavyko atidaryti failo rezultatai.txt" << endl;
+        cout << "Nepavyko atidaryti failo " << FailoPav << endl;
     }
 }
