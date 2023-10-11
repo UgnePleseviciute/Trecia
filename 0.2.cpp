@@ -2,6 +2,7 @@
 #include "Faprasai.h"
 #include <chrono>
 
+
 void Antrai(vector<Studentas>& studentai) {
     char SkaiciavimoBudas;
     cout << "Pasirinkite skaiciavimo metoda (V- Vidurkis, M - Mediana): ";
@@ -112,8 +113,9 @@ void Antrai(vector<Studentas>& studentai) {
 
     start = high_resolution_clock::now();
 
-    AntrosIsvedimasIAtskirusFailus(BiskiBumBum, SkaiciavimoBudas, nd_skaicius, tableWidth, "BiskiBumBum.txt");
-    AntrosIsvedimasIAtskirusFailus(BiskiProtingi, SkaiciavimoBudas, nd_skaicius, tableWidth, "BiskiProtingi.txt");
+    AntrosIsvedimasIAtskirusFailus(BiskiBumBum, SkaiciavimoBudas, nd_skaicius, tableWidth, "BiskiBumBum_" + to_string(BiskiBumBum.size()) +"_" + to_string(StudKiekis) + ".txt");
+    AntrosIsvedimasIAtskirusFailus(BiskiProtingi, SkaiciavimoBudas, nd_skaicius, tableWidth, "BiskiProtingi_" + to_string(BiskiProtingi.size()) + "_" + to_string(StudKiekis) + ".txt");
+
 
     stop = high_resolution_clock::now(); // baigia matuoti failu isvedima
     duration = duration_cast<seconds>(stop - start);
