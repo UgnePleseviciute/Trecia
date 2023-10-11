@@ -1,10 +1,12 @@
 #include "Stu.h"
 #include "Faprasai.h"
+#include <chrono>
 
 void Antrai(vector<Studentas>& studentai) {
     char SkaiciavimoBudas;
     cout << "Pasirinkite skaiciavimo metoda (V- Vidurkis, M - Mediana): ";
     cin >> SkaiciavimoBudas;
+    cout<< endl;
 
     int StudKiekis;
     cout << "Iveskite studentu kieki: ";
@@ -14,8 +16,10 @@ void Antrai(vector<Studentas>& studentai) {
     cout << "Iveskite ND pazymiu skaiciu: ";
     cin >> nd_skaicius;
 
-    vector<Studentas> BiskiBumBum; // Studentai  < 5
+    vector<Studentas> BiskiBumBum; // Studentai < 5
     vector<Studentas> BiskiProtingi; // Studentai >= 5
+
+    auto start = high_resolution_clock::now();  // pradeda matuoti kiek truks duomenu generavimas
 
     for (int i = 1; i <= StudKiekis; ++i) {
         Studentas studentas;
@@ -31,15 +35,20 @@ void Antrai(vector<Studentas>& studentai) {
 
         studentai.push_back(studentas);
 
-        if (studentas.GalutinisB < 5.0) {    //palygina galutni bala
+        if (studentas.GalutinisB < 5.0) {    // Palygina galutni bala
             BiskiBumBum.push_back(studentas);
         } else {
             BiskiProtingi.push_back(studentas);
         }
     }
 
+    auto stop = high_resolution_clock::now();
+    auto duration = duration_cast<seconds>(stop - start);
+    cout << "Duomenu generavimas uztruko: " << duration.count() << " s" << endl;  // baigia matuoti duomenu generavima
+    cout << endl;
+
     int tableWidth = 95;
-    cout << string(tableWidth, '-') << endl;
+    /*cout << string(tableWidth, '-') << endl;
     cout << "| " << left << setw(20) << "Vardas" << " | " << setw(20) << "Pavarde" << " | ";
 
     for (int i = 1; i <= nd_skaicius; ++i) {
@@ -52,9 +61,11 @@ void Antrai(vector<Studentas>& studentai) {
     } else {
         cout << setw(20) << "Galutinis (Med)" << " |" << endl;
     }
-    cout << string(tableWidth, '-') << endl;
+    //cout << string(tableWidth, '-') << endl;*/
 
     string FailoPav = "rezultatai_" + to_string(StudKiekis) + ".txt";
+
+    start = high_resolution_clock::now(); // pradeda matuoti duomenu isvedima
 
     ofstream outFile(FailoPav);
 
@@ -94,17 +105,32 @@ void Antrai(vector<Studentas>& studentai) {
     } else {
         cout << "Nepavyko atidaryti failo " << FailoPav << endl;
     }
-    //I atskirus failus pagal lygius
+    stop = high_resolution_clock::now(); // baigia matuoti failu isvedima
+    duration = duration_cast<seconds>(stop - start);
+    cout << "Duomenu isvedimas uztruko: " << duration.count() << " s" << endl;
+    cout << endl;
+
+    start = high_resolution_clock::now();
+
     AntrosIsvedimasIAtskirusFailus(BiskiBumBum, SkaiciavimoBudas, nd_skaicius, tableWidth, "BiskiBumBum.txt");
     AntrosIsvedimasIAtskirusFailus(BiskiProtingi, SkaiciavimoBudas, nd_skaicius, tableWidth, "BiskiProtingi.txt");
+
+    stop = high_resolution_clock::now(); // baigia matuoti failu isvedima
+    duration = duration_cast<seconds>(stop - start);
+    cout << "duomenu iskirtymas uztruko: " << duration.count() << " s" <<  endl;
+    cout << endl;
+
+    PasirinktiVeiksma(studentai);
 }
-    void AntrosIsvedimasIAtskirusFailus(const vector<Studentas>& studentai, char SkaiciavimoBudas, int nd_skaicius, int tableWidth, const string& failoPavadinimas) {
+
+void AntrosIsvedimasIAtskirusFailus(const vector<Studentas>& studentai, char SkaiciavimoBudas, int nd_skaicius, int tableWidth, const string& failoPavadinimas) {
+    auto start = high_resolution_clock::now(); // pradeda matuoti kiek uztrunka sukurti atskirus failus
+
     ofstream outFile(failoPavadinimas);
 
     if (outFile.is_open()) {
         outFile << string(tableWidth, '-') << endl;
         outFile << "| " << left << setw(20) << "Vardas" << " | " << setw(20) << "Pavarde" << " | ";
-
 
         if (SkaiciavimoBudas == 'V' || SkaiciavimoBudas == 'v') {
             outFile << setw(20) << "Galutinis (Vid)" << " |" << endl;
@@ -129,4 +155,8 @@ void Antrai(vector<Studentas>& studentai) {
         cout << "Nepavyko atidaryti failo " << failoPavadinimas << endl;
     }
 
+    auto stop = high_resolution_clock::now(); // baigia
+    auto duration = duration_cast<seconds>(stop - start);
+    cout << "Duomenu isvedimas uztruko: " << duration.count() << " s" << endl;
+    cout << endl;
 }
