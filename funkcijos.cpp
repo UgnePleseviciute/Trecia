@@ -5,9 +5,9 @@
 void PasirinktiVeiksma(vector<Studentas>& studentai) {
 
     char pasirinkimas;
-    cout << "Pasirinkite kaip vesime duomenis (1 - nuskaityta bus is failo, 2 - duomenis reiks ivesti ranka), Ar norite kad sarasas studentu butu automatiskai sugeneruotas (3): ";
+    cout << "Pasirinkite kaip vesime duomenis (1 - nuskaityta bus is failo, 2 - duomenis reiks ivesti ranka),3 - Studentu sarasas bus sugeneruotas automatiskai ir parodyti laikai kiek uztruko, 4 - Baigti programa: ";
     cin >> pasirinkimas;
-
+    cout<< endl;
     if (pasirinkimas == '1') { //nusakito is failiuko
 
         int pazymiu_sk;
@@ -20,6 +20,7 @@ void PasirinktiVeiksma(vector<Studentas>& studentai) {
         char SkaiciavimoBudas;
         cout << "Pasirinkite skaiciavimo metoda (V- Vidurkis, M - Mediana): ";
         cin >> SkaiciavimoBudas;
+        cout << endl;
 
         if (SkaiciavimoBudas != 'V' && SkaiciavimoBudas != 'v' && SkaiciavimoBudas != 'M' && SkaiciavimoBudas != 'm') {
             cout << "Nesuprantama ivesti, naudosime Vidurki pagal Defaulta." << endl;
@@ -48,6 +49,9 @@ void PasirinktiVeiksma(vector<Studentas>& studentai) {
     else if (pasirinkimas == '3') {
          Antrai(studentai);
 
+    }
+    else if (pasirinkimas == '4') {
+        exit(0);
     }
 }
 void StudentoDuomenys(Studentas& studentas) {

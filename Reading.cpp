@@ -88,3 +88,20 @@ void IsvedimasLenteles(const vector<Studentas>& studentai) {
 bool CompareByVardas(const Studentas& a, const Studentas& b) { //
     return a.Vardas < b.Vardas;
 }
+bool CompareByVardas1(const Studentas& a, const Studentas& b) { //
+    return a.Vardas > b.Vardas;
+}
+bool CompareByPavarde(const Studentas& a, const Studentas& b) { //
+    return a.Pavarde < b.Pavarde;
+
+}
+bool CompareByPavarde1(const Studentas& a, const Studentas& b) { //
+    return a.Pavarde > b.Pavarde;
+
+}
+bool CompareByBalas(const Studentas& a, const Studentas& b) { //
+    return a.GalutinisB < b.GalutinisB;
+}
+bool CompareByBalas1(const Studentas& a, const Studentas& b) { //
+    return a.GalutinisB > b.GalutinisB;
+}

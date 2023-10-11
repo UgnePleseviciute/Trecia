@@ -14,9 +14,11 @@
 #include <iterator>
 #include <stdexcept>
 #include <sstream>
-#include <string> // Include this line for 'to_string'
-#include <stdexcept> // Include this line for 'invalid_argument'
-#
+#include <string>
+#include <stdexcept>
+#include <chrono>
+#include <cstdlib>
+
 
 using std::cout;
 using std::endl;
@@ -45,6 +47,7 @@ using std::numeric_limits;
 using std::srand;
 using std::random_shuffle;
 using std::ofstream;
+using namespace std::chrono;
 
 struct Studentas {
     string Vardas;

@@ -4,23 +4,30 @@
 
 
 void Antrai(vector<Studentas>& studentai) {
-    char SkaiciavimoBudas;
+
+    char SkaiciavimoBudas, Rikiavimas, Mazeja;
+    int StudKiekis, nd_skaicius;
+
     cout << "Pasirinkite skaiciavimo metoda (V- Vidurkis, M - Mediana): ";
     cin >> SkaiciavimoBudas;
     cout<< endl;
 
-    int StudKiekis;
+    cout << "Pasirinkite kaip noresite, kad rezultatai butu pateikti: 1- Isrusiuoti pagal vardus, 2- Isrusiuoti pagal pavardes, 3 - Isrusiuoti pagal pazymius: ";
+    cin >> Rikiavimas;
+
+    cout << "Didejimo ar mazejimo tvarka: 1- Didejimo, 2- Mazejimo: ";
+    cin >> Mazeja;
+
     cout << "Iveskite studentu kieki: ";
     cin >> StudKiekis;
 
-    int nd_skaicius;
     cout << "Iveskite ND pazymiu skaiciu: ";
     cin >> nd_skaicius;
 
     vector<Studentas> BiskiBumBum; // Studentai < 5
     vector<Studentas> BiskiProtingi; // Studentai >= 5
 
-    auto start = high_resolution_clock::now();  // pradeda matuoti kiek truks duomenu generavimas
+    auto start = high_resolution_clock::now();  // pradeda matuoti kiek truks duomenu generavimas ir palyginimas
 
     for (int i = 1; i <= StudKiekis; ++i) {
         Studentas studentas;
@@ -48,26 +55,30 @@ void Antrai(vector<Studentas>& studentai) {
     cout << "Duomenu generavimas uztruko: " << duration.count() << " s" << endl;  // baigia matuoti duomenu generavima
     cout << endl;
 
-    int tableWidth = 95;
-    /*cout << string(tableWidth, '-') << endl;
-    cout << "| " << left << setw(20) << "Vardas" << " | " << setw(20) << "Pavarde" << " | ";
+    int tableWidth = 100;
 
-    for (int i = 1; i <= nd_skaicius; ++i) {
-        cout << "ND" << i << " | ";
-    }
-    cout << "Egzaminas | ";
-
-    if (SkaiciavimoBudas == 'V' || SkaiciavimoBudas == 'v') {
-        cout << setw(20) << "Galutinis (Vid)" << " |" << endl;
-    } else {
-        cout << setw(20) << "Galutinis (Med)" << " |" << endl;
-    }
-    //cout << string(tableWidth, '-') << endl;*/
+    Rusiavimaass(studentai, BiskiBumBum, BiskiProtingi, Rikiavimas, Mazeja);
 
     string FailoPav = "rezultatai_" + to_string(StudKiekis) + ".txt";
 
-    start = high_resolution_clock::now(); // pradeda matuoti duomenu isvedima
+    IsvestiDuomenisIpagrFaila(studentai, SkaiciavimoBudas, nd_skaicius, tableWidth, FailoPav);
 
+    start = high_resolution_clock::now();
+
+    AntrosIsvedimasIAtskirusFailus(BiskiBumBum, SkaiciavimoBudas, nd_skaicius, tableWidth, "BiskiBumBum_" + to_string(BiskiBumBum.size()) +"_" + to_string(StudKiekis) + ".txt");
+    AntrosIsvedimasIAtskirusFailus(BiskiProtingi, SkaiciavimoBudas ,nd_skaicius, tableWidth, "BiskiProtingi_" + to_string(BiskiProtingi.size()) + "_" + to_string(StudKiekis) + ".txt");
+
+
+    stop = high_resolution_clock::now(); // baigia matuoti failu isvedima
+    duration = duration_cast<seconds>(stop - start);
+    cout << "duomenu iskirtymas uztruko: " << duration.count() << " s" <<  endl;
+    cout << endl;
+
+    PasirinktiVeiksma(studentai);
+}
+void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, char SkaiciavimoBudas, int nd_skaicius, int tableWidth, const string& FailoPav) {
+
+    auto start = high_resolution_clock::now(); // Pradeda matuoti duomenų išvedimą
     ofstream outFile(FailoPav);
 
     if (outFile.is_open()) {
@@ -84,6 +95,7 @@ void Antrai(vector<Studentas>& studentai) {
         } else {
             outFile << setw(20) << "Galutinis (Med)" << " |" << endl;
         }
+
         outFile << string(tableWidth, '-') << endl;
 
         for (const Studentas& studentas : studentai) {
@@ -102,30 +114,19 @@ void Antrai(vector<Studentas>& studentai) {
             }
         }
         outFile.close();
-        cout << "Duomenys isvesti i faila " << FailoPav << endl;
+        cout << "Duomenys isvestii i faila " << FailoPav << endl;
     } else {
         cout << "Nepavyko atidaryti failo " << FailoPav << endl;
     }
-    stop = high_resolution_clock::now(); // baigia matuoti failu isvedima
-    duration = duration_cast<seconds>(stop - start);
+
+    auto stop = high_resolution_clock::now(); // Baigia matuoti failų išvedimą
+    auto duration = duration_cast<seconds>(stop - start);
     cout << "Duomenu isvedimas uztruko: " << duration.count() << " s" << endl;
     cout << endl;
-
-    start = high_resolution_clock::now();
-
-    AntrosIsvedimasIAtskirusFailus(BiskiBumBum, SkaiciavimoBudas, nd_skaicius, tableWidth, "BiskiBumBum_" + to_string(BiskiBumBum.size()) +"_" + to_string(StudKiekis) + ".txt");
-    AntrosIsvedimasIAtskirusFailus(BiskiProtingi, SkaiciavimoBudas, nd_skaicius, tableWidth, "BiskiProtingi_" + to_string(BiskiProtingi.size()) + "_" + to_string(StudKiekis) + ".txt");
-
-
-    stop = high_resolution_clock::now(); // baigia matuoti failu isvedima
-    duration = duration_cast<seconds>(stop - start);
-    cout << "duomenu iskirtymas uztruko: " << duration.count() << " s" <<  endl;
-    cout << endl;
-
-    PasirinktiVeiksma(studentai);
 }
 
-void AntrosIsvedimasIAtskirusFailus(const vector<Studentas>& studentai, char SkaiciavimoBudas, int nd_skaicius, int tableWidth, const string& failoPavadinimas) {
+void AntrosIsvedimasIAtskirusFailus(const vector<Studentas>& studentai, char SkaiciavimoBudas, int nd_skaicius, int tableWidth, const string& failoPavadinimas){
+
     auto start = high_resolution_clock::now(); // pradeda matuoti kiek uztrunka sukurti atskirus failus
 
     ofstream outFile(failoPavadinimas);
@@ -162,3 +163,40 @@ void AntrosIsvedimasIAtskirusFailus(const vector<Studentas>& studentai, char Ska
     cout << "Duomenu isvedimas uztruko: " << duration.count() << " s" << endl;
     cout << endl;
 }
+
+void Rusiavimaass(vector<Studentas>& studentai, vector<Studentas>& BiskiBumBum, vector<Studentas>& BiskiProtingi, char Rikiavimas, char Mazeja) {
+    if (Rikiavimas == '1' && Mazeja == '1') {
+        sort(studentai.begin(), studentai.end(), CompareByVardas);
+        sort(BiskiBumBum.begin(), BiskiBumBum.end(), CompareByVardas);
+        sort(BiskiProtingi.begin(), BiskiProtingi.end(), CompareByVardas);
+    }
+    else if (Rikiavimas == '1' && Mazeja == '2') {
+        sort(studentai.begin(), studentai.end(), CompareByVardas1);
+        sort(BiskiBumBum.begin(), BiskiBumBum.end(), CompareByVardas1);
+        sort(BiskiProtingi.begin(), BiskiProtingi.end(), CompareByVardas1);
+    }
+    else if (Rikiavimas == '2' && Mazeja == '1') {
+        sort(studentai.begin(), studentai.end(), CompareByPavarde);
+        sort(BiskiBumBum.begin(), BiskiBumBum.end(), CompareByPavarde);
+        sort(BiskiProtingi.begin(), BiskiProtingi.end(), CompareByPavarde);
+    }
+    else if (Rikiavimas == '2' && Mazeja == '2') {
+        sort(studentai.begin(), studentai.end(), CompareByPavarde1);
+        sort(BiskiBumBum.begin(), BiskiBumBum.end(), CompareByPavarde1);
+        sort(BiskiProtingi.begin(), BiskiProtingi.end(), CompareByPavarde1);
+    }
+    else if (Rikiavimas == '3' && Mazeja == '1') {
+        sort(studentai.begin(), studentai.end(), CompareByBalas);
+        sort(BiskiBumBum.begin(), BiskiBumBum.end(), CompareByBalas);
+        sort(BiskiProtingi.begin(), BiskiProtingi.end(), CompareByBalas);
+    }
+    else if (Rikiavimas == '3' && Mazeja == '2') {
+        sort(studentai.begin(), studentai.end(), CompareByBalas1);
+        sort(BiskiBumBum.begin(), BiskiBumBum.end(), CompareByBalas1);
+        sort(BiskiProtingi.begin(), BiskiProtingi.end(), CompareByBalas1);
+    }
+}
+
+
+
+
