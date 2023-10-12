@@ -1,6 +1,7 @@
 #ifndef STU_H_INCLUDED
 #define STU_H_INCLUDED
 
+
 #include <string>
 #include <vector>
 #include <iostream>
@@ -59,5 +60,4 @@ struct Studentas {
 };
 
 
-
-#endif
+#endif // STU_H_INCLUDED
