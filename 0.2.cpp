@@ -14,9 +14,15 @@ void Antrai(vector<Studentas>& studentai) {
 
     cout << "Pasirinkite kaip noresite, kad rezultatai butu pateikti: 1- Isrusiuoti pagal vardus, 2- Isrusiuoti pagal pavardes, 3 - Isrusiuoti pagal pazymius: ";
     cin >> Rikiavimas;
+   // if (Rikiavimas != '1' && Rikiavimas != '2' && Rikiavimas != '3') {
+   // cerr << "Blogas pasirinkimas. Prasau ivesti 1, 2 arba 3." << endl;
+
+
 
     cout << "Didejimo ar mazejimo tvarka: 1- Didejimo, 2- Mazejimo: ";
     cin >> Mazeja;
+    //if (Mazeja != 1 && Mazeja != 2 ) {
+   // cerr << "Blogas pasirinkimas. Prasau ivesti 1 arba 2" << endl;}
 
     cout << "Iveskite studentu kieki: ";
     cin >> StudKiekis;
