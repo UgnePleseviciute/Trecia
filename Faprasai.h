@@ -18,7 +18,7 @@ bool CompareByBalas(const Studentas& a, const Studentas& b);
 bool CompareByBalas1(const Studentas& a, const Studentas& b);
 bool CompareByVardas1(const Studentas& a, const Studentas& b);
 void Rusiavimaass(vector<Studentas>& mok, vector<Studentas>& biskiBumBum, vector<Studentas>& biskiProtingi, char Rikiavimas, char Mazeja);
-void IsvestiDuomenisIpagrFaila(const vector<Studentas>& mok, char SkaiciavimoBudas, int nd_skaicius, int tableWidth, const string& FailoPav);
+void IsvestiDuomenisIpagrFaila(const vector<Studentas>& mok, char SkaiciavimoBudas, int tableWidth, const string& FailoPav);
 unsigned int countWordsInString(const string& str);
 void readIsfailo3(vector<Studentas>& studentai);
 void failoGeneravimas(vector<Studentas>& studentai, int StudKiekis, int nd_skaicius, char SkaiciavimoBudas, int tableWidth);

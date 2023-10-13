@@ -7,7 +7,7 @@ void Antrai(vector<Studentas>& studentai) {
 
     char SkaiciavimoBudas = 'v', Rikiavimas, Mazeja;
     int StudKiekis, nd_skaicius;
-    int tableWidth = 100;
+    int tableWidth = 100; //lenteles plotas
     int FailuKiekis;
     string FailoPav;
 
@@ -23,16 +23,23 @@ void Antrai(vector<Studentas>& studentai) {
     cin >> nd_skaicius;
     cout << "--------------------------------------------------" << endl;
 
-    for ( int i =1 ; i <= FailuKiekis ; i++)
+
+
+    for ( int i =1 ; i <= FailuKiekis ; i++)  // sukam cikla tol kol tenkina salyga
     {
-        failoGeneravimas(studentai, StudKiekis, nd_skaicius, SkaiciavimoBudas, tableWidth);
+        auto start = high_resolution_clock::now();
+        failoGeneravimas(studentai, StudKiekis, nd_skaicius, SkaiciavimoBudas, tableWidth); //kviecia failu generabimu funkcija
         cout << "laiko matavimai nuskaitant is failo: " <<endl;
         cout << endl;
-        readIsfailo3(studentai);
+        readIsfailo3(studentai);   //kviecia nuskaitymo funkcija
         studentai.clear(); // isvalo studentu vektoriu pries generuojant kita nes kitaip pizdec biski
+        auto stop = high_resolution_clock::now();
+        MatuotiLaika(start, stop, "Visas veikimo laikas");
         cout<< "-------------------------------------------------- " << endl;
     }
 
+
+PasirinktiVeiksma(studentai);
 
 }
 void failoGeneravimas(vector<Studentas>& studentai, int StudKiekis, int nd_skaicius, char SkaiciavimoBudas, int tableWidth) {
@@ -54,29 +61,33 @@ void failoGeneravimas(vector<Studentas>& studentai, int StudKiekis, int nd_skaic
         studentas.Egzas = rand() % 11;
         studentas.GalutinisB = GalutinisBalas(studentas);
 
-        studentai.push_back(studentas);
+        studentai.push_back(studentas);  // kiekvienas sugeneruotas studentas perduodamas vektoriui studentai, kur sis vektorius yra oerduodamas kaip funkcijos parametras
 
     }
+    start = high_resolution_clock::now();
 
-    string FailoPav = to_string(StudKiekis) + ".txt";
-
+    sort(studentai.begin(), studentai.end(), CompareByBalas); // surusiuojami studentu duomenys pagal varda
     auto stop = high_resolution_clock::now();
+    MatuotiLaika(start, stop, "Duomenu isrikiavimas pagal pazymius:");
+
+    string FailoPav = to_string(StudKiekis) + ".txt"; // sukuriamas unikalus failo pavadinimas
+
+    stop = high_resolution_clock::now();
     MatuotiLaika(start, stop, "Duomenu generavimas");
-    IsvestiDuomenisIpagrFaila(studentai, SkaiciavimoBudas, nd_skaicius, tableWidth, FailoPav);
+    IsvestiDuomenisIpagrFaila(studentai, SkaiciavimoBudas, tableWidth, FailoPav); // kvieciama isvedimo funkcija kuri isveda piurmini faila i kompa
 }
 
 void readIsfailo3(vector<Studentas>& studentai) {
 
     auto start = high_resolution_clock::now();
-
     char SkaiciavimoBudas;
     int nd_skaicius;
     int tableWidth, StudKiekis;
-    string failoPavadinimas;
+    string failoPavadinimas; //leidziama vartotojui ivesti failo pavadinima
     cout << "Iveskite failo pavadinima: ";
     cin >> failoPavadinimas;
 
-    ifstream inFile(failoPavadinimas);
+    ifstream inFile(failoPavadinimas); // atidaromas failas skaitymui
 
     if (inFile.is_open()) {
         string line;
@@ -87,14 +98,14 @@ void readIsfailo3(vector<Studentas>& studentai) {
                 praleisti = false; // daugiau nepraleidzia eiluciu
                 continue; // Praleisti sia eilute ir eiti toliau
             }
-            istringstream iss(line);
+            istringstream iss(line); // Tai yra "input string stream" klasė, kuri leidžia jums skaityti duomenis iš teksto eilutės kaip iš tekstinio srauto. Ši klasė yra naudinga, kai turite tekstinę eilutę, kurią norite išskaidyti į atskirus duomenis, pvz., skaičius arba žodžius.
             Studentas studentas;
-            iss >> studentas.Vardas >> studentas.Pavarde >> studentas.GalutinisB;
+            iss >> studentas.Vardas >> studentas.Pavarde >> studentas.GalutinisB; //nuskaito viska ir prideda studentai vektoriu
             studentai.push_back(studentas);
             //cout << line << endl;
         }
 
-        inFile.close();
+        inFile.close(); //baigus skaityti uzdaro faila
     } else {
         cout << "Nepavyko atidaryti failo." << endl;
     }
@@ -130,13 +141,13 @@ void Iskirstymas (vector<Studentas>& studentai, string failoPavadinimas, int Ska
 
 }
 
-void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, char SkaiciavimoBudas, int nd_skaicius, int tableWidth, const string& FailoPav) {
+void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, char SkaiciavimoBudas, int tableWidth, const string& FailoPav) {
 
     auto start = high_resolution_clock::now(); // Pradeda matuoti duomenu isvedima
-    ofstream outFile(FailoPav);
+    ofstream outFile(FailoPav); // sukuriams naujas failas duomenu isvedimui
 
-    if (outFile.is_open()) {
-        outFile  << left << setw(20) << "Vardas" << " | " << setw(20) << "Pavarde" << " | ";
+    if (outFile.is_open()) { //tikrina ar pavyko atidaryti faila
+        outFile  << left << setw(20) << "Vardas" << " | " << setw(20) << "Pavarde" << " | "; // isvedama antraste
 
         if (SkaiciavimoBudas == 'V' || SkaiciavimoBudas == 'v') {
             outFile << setw(20) << "Galutinis (Vid)" << " |" << endl;
@@ -145,7 +156,7 @@ void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, char Skaiciav
         }
 
 
-        for (const Studentas& studentas : studentai) {
+        for (const Studentas& studentas : studentai) { // isvedami duomenys
             outFile << left << setw(20) << studentas.Vardas  << setw(20)
                 << studentas.Pavarde << " | ";
 
@@ -155,7 +166,7 @@ void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, char Skaiciav
                 outFile << setw(20) << fixed << setprecision(2) << studentas.GalutinisB << " |" << endl;
             }
         }
-        outFile.close();
+        outFile.close(); // failas uzdaromas baigus isvedima
         cout << "Duomenys isvestii i faila " << FailoPav << endl;
     } else {
         cout << "Nepavyko atidaryti failo " << FailoPav << endl;
@@ -169,16 +180,16 @@ void AntrosIsvedimasIAtskirusFailus(const vector<Studentas>& studentai, char Ska
 
     auto start = high_resolution_clock::now(); // pradeda matuoti kiek uztrunka sukurti atskirus failus
 
-    ofstream outFile(failoPavadinimas);
+    ofstream outFile(failoPavadinimas); // sukuriamas naujas failas duomenu isvedimui
 
-    if (outFile.is_open()) {
+    if (outFile.is_open()) { // tikrina ar pavyko atidaro faila
         outFile << string(tableWidth, '-') << endl;
-        outFile << "| " << left << setw(20) << "Vardas" << " | " << setw(20) << "Pavarde" << " | ";
+        outFile << "| " << left << setw(20) << "Vardas" << " | " << setw(20) << "Pavarde" << " | "; // isvedama antraste
 
         if (SkaiciavimoBudas == 'V' || SkaiciavimoBudas == 'v') {
             outFile << setw(20) << "Galutinis (Vid)" << " |" << endl;
         } else {
-            outFile << setw(20) << "Galutinis (Med)" << " |" << endl;
+            outFile << setw(20) << "Galutinis (Med)" << " |" << endl; // cia jei geriau kodas veiktu
         }
         outFile << string(tableWidth, '-') << endl;
 
@@ -192,7 +203,7 @@ void AntrosIsvedimasIAtskirusFailus(const vector<Studentas>& studentai, char Ska
                 outFile << setw(20) << fixed << setprecision(2) << studentas.GalutinisB << " |" << endl;
             }
         }
-        outFile.close();
+        outFile.close(); // failas uzdaromas baigus isvedima
         cout << "Duomenys isvesti i faila " << failoPavadinimas << endl;
     } else {
         cout << "Nepavyko atidaryti failo " << failoPavadinimas << endl;
@@ -204,7 +215,10 @@ void AntrosIsvedimasIAtskirusFailus(const vector<Studentas>& studentai, char Ska
 }
 
 void MatuotiLaika(high_resolution_clock::time_point start, high_resolution_clock::time_point stop, const string& veiksmas) {
-    auto duration = duration_cast<milliseconds>(stop - start);
-    cout << veiksmas << " uztruko: " << duration.count() << " ms" << endl;
-    cout << endl;
+    auto duration = duration_cast<milliseconds >(stop - start);
+    double seconds = duration.count() / 10000.0; // Konvertuoja milisekundes i sekundes
+
+    cout << veiksmas << " uztruko: " << std::fixed << setprecision(3) << seconds << " s" << std::endl;
+    cout << std::endl;
 }
+
