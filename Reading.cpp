@@ -17,15 +17,15 @@ void read_from_file(vector<Studentas>& mok, int* pazymiu_sk) {
     cin >> failoPavadinimas;
 
     try {
-        fileRead.open(failoPavadinimas);
+        fileRead.open(failoPavadinimas); // atidaromas failas
 
         if (!fileRead.is_open()) {
-            throw invalid_argument("Failas '" + failoPavadinimas + "' neegzistuoja arba negali buti atidarytas!");
+            throw invalid_argument("Failas '" + failoPavadinimas + "' neegzistuoja arba negali buti atidarytas!"); // jei neatidaro cia meta sita errora
         }
 
         if (fileRead.is_open()) {
             getline(fileRead >> ws, buff);
-            *pazymiu_sk = countWordsInString(buff) - 3;
+            *pazymiu_sk = countWordsInString(buff) - 3; //* naudojama kaip rodykles priskirymas
             while (true) {
                 mok.resize(mok.size() + 1);
                 fileRead >> mok.at(student_counter).Vardas;
@@ -51,7 +51,7 @@ void read_from_file(vector<Studentas>& mok, int* pazymiu_sk) {
     }
 }
 
-float count_vidurkis(const vector<int>& pazymiai) {
+float count_vidurkis(const vector<int>& pazymiai) { //skaiciuoja vidurki
     int suma = 0;
     for (int pazymys : pazymiai) {
         suma += pazymys;
@@ -59,7 +59,7 @@ float count_vidurkis(const vector<int>& pazymiai) {
     return static_cast<float>(suma) / pazymiai.size();
 }
 
-float count_median(const vector<int>& pazymiai) {
+float count_median(const vector<int>& pazymiai) { //suskaiciuoja mediana
     vector<int> sorted_pazymiai = pazymiai;
     sort(sorted_pazymiai.begin(), sorted_pazymiai.end());
 

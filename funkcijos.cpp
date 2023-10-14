@@ -41,15 +41,15 @@ void PasirinktiVeiksma(vector<Studentas>& studentai) { // priima studentu objekt
         sort(studentai.begin(), studentai.end(), CompareByVardas); // surusiuojama pagal varda
         cout << "Studentu duomenys ir galutiniai balai:" << endl; }
 
-    else if (pasirinkimas == '3') {
-         Antrai(studentai);
+    else if (pasirinkimas == '3') { // jei pasirinkimas 3 kviecia antrai funkcija
+         Antraa(studentai);
 
     }
-    else if (pasirinkimas == '4') {
+    else if (pasirinkimas == '4') { // jei 4 baigia programos veikima
         exit(0);
     }
 }
-void StudentoDuomenys(Studentas& studentas) {
+void StudentoDuomenys(Studentas& studentas) { // nuoroda funkcijos  i studentas objekta, kuris bus uzpildytas per sios funkcijos veikima duomenimis
     cout << "Iveskite studento varda: ";
     cin >> studentas.Vardas;
 
@@ -66,7 +66,7 @@ void StudentoDuomenys(Studentas& studentas) {
 
         const int NDkiekis = rand() % 10 + 1;
 
-        studentas.ND.clear();
+        studentas.ND.clear(); //nes leidzia pasrinikti ar ranka vesim ar ne , jei anksciau buvo ivesta ir jie nebuvo issaugoti tai juos reik isvalyti
 
         cout << "Atsitiktinai sugeneruoti ND pazymiai: ";
         for (int i = 0; i < NDkiekis; ++i) {
@@ -100,7 +100,7 @@ void StudentoDuomenys(Studentas& studentas) {
                 throw invalid_argument("Netinkamas pazymio formatas. Pazymiai turi buti nuo 0 iki 10.");
             }
             // Tikrinu ar tikrai tik skaicius ivede
-            if (cin.fail()) {
+            if (cin.fail()) { // tikrina ar pavyko nuskaityti reiksmes kurias ivede naudotojas
                 cin.clear(); // klaida salina
                 cin.ignore(numeric_limits<streamsize>::max(), '\n'); // padaro kad is naujo vesti skaicius
                 throw invalid_argument("Ivesti netinkami duomenys (raide/simbolis). Prasau vesti tik skaicius.");
@@ -109,7 +109,7 @@ void StudentoDuomenys(Studentas& studentas) {
             studentas.ND.push_back(NDrez);
             totalHomework += NDrez;
         } catch (const invalid_argument& e) {
-            cout << e.what() << endl;
+            cout << e.what() << endl; //metodas kazkoks, naudojamas gauti klaidos pranesima , kuri programuotojas nurodo
             continue;
         }
     }
@@ -151,7 +151,7 @@ double GalutinisBalas(const Studentas& studentas) {
             totalHomework += nd;
         }
 
-        double GalutinisVidurkis = 0.4 * static_cast<double>(totalHomework) / studentas.ND.size() + 0.6 * studentas.Egzas;
+        double GalutinisVidurkis = 0.4 * static_cast<double>(totalHomework) / studentas.ND.size() + 0.6 * studentas.Egzas; //statistic  konvertuoja kitanmi i double
         return GalutinisVidurkis;
     }
 }
