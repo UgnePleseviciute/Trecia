@@ -2,7 +2,7 @@
 #include "Faprasai.h"
 
 void Antraa(vector<Studentas>& studentai) {
-    double visoLaiko = 0.0;  // Kintamasis laiko sumai
+    double visoLaikoTrukme = 0.0;  // Kintamasis laiko sumai
     const vector<int> studentCounts = {1000/*, 10000, 100000, 1000000, 10000000*/};
     string FailoPav;
     int Pasirinkimas, Tvarka;
@@ -18,13 +18,23 @@ void Antraa(vector<Studentas>& studentai) {
     cout << "2 - Pagal pavarde \n";
     cout << "3 - Pagal pazymius \n";
     cin >> Pasirinkimas;
+    if (Pasirinkimas != 1 ||  Pasirinkimas != 2 || Pasirinkimas != 3)
+    {
+        cout<< "netinkamas pasirinkimas rusiuosime pagal varda ";
+        Pasirinkimas = 1;
+    }
 
     cout << "Pasirinkite kokia tvarka matuosime \n";
     cout << "1 - Didejimo \n";
     cout << "2 - Mazejimo \n";
     cin>> Tvarka;
+    if (Tvarka != 1 || Tvarka != 2) {
+        cout<< "netinkamas pasirinkimas rusiuosime Didejimo tvarka ";
+        Tvarka = 1;
+    }
 
     if (ArMatuotiLaika()) {
+
         for (int StudKiekis : studentCounts) {
             cout << "Studentu kiekis: " << StudKiekis << " duomenu" << endl;
             double matavimoLaikaiNuskaitymas[3] = {0};
@@ -85,6 +95,8 @@ void Antraa(vector<Studentas>& studentai) {
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
             }
+
+
             //apsakaiciuoja vidutinius laikus
             double vidutinisNuskaitymas = (matavimoLaikaiNuskaitymas[0] + matavimoLaikaiNuskaitymas[1] + matavimoLaikaiNuskaitymas[2]) / 3;
             double vidutinisRikiavimas = (matavimoLaikaiRikiavimas[0] + matavimoLaikaiRikiavimas[1] + matavimoLaikaiRikiavimas[2]) / 3;
@@ -98,9 +110,10 @@ void Antraa(vector<Studentas>& studentai) {
             cout << "Vidutinis isvedimo laikas vargsiukams (" << StudKiekis << " duomenu): " << vidutinisIsvestisVargsiukai << " s" << endl;
             cout << "Vidutinis isvedimo laikas kietiakiams (" << StudKiekis << " duomenu): " << vidutinisIsvestisKietiakiai << " s" << endl;
             cout<< endl;
-
             studentai.clear(); //isvalom vektoriu
         }
+
+
     }
     PasirinktiVeiksma(studentai);
 }
