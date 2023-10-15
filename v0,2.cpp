@@ -18,19 +18,20 @@ void Antraa(vector<Studentas>& studentai) {
     cout << "2 - Pagal pavarde \n";
     cout << "3 - Pagal pazymius \n";
     cin >> Pasirinkimas;
-    if (Pasirinkimas != 1 ||  Pasirinkimas != 2 || Pasirinkimas != 3)
-    {
-        cout<< "netinkamas pasirinkimas rusiuosime pagal varda ";
-        Pasirinkimas = 1;
-    }
+   if (Pasirinkimas != 1 && Pasirinkimas != 2 && Pasirinkimas != 3)
+{
+    cout << "Netinkamas pasirinkimas, rūšiuosime pagal vardą ";
+    Pasirinkimas = 1;
+}
 
-    cout << "Pasirinkite kokia tvarka matuosime \n";
-    cout << "1 - Didejimo \n";
-    cout << "2 - Mazejimo \n";
-    cin>> Tvarka;
-    if (Tvarka != 1 || Tvarka != 2) {
-        cout<< "netinkamas pasirinkimas rusiuosime Didejimo tvarka ";
-        Tvarka = 1;
+cout << "Pasirinkite kokia tvarka matuosime \n";
+cout << "1 - Didejimo \n";
+cout << "2 - Mazejimo \n";
+cin >> Tvarka;
+if (Tvarka != 1 && Tvarka != 2) {
+    cout << "Netinkamas pasirinkimas, rūšiuosime didejimo tvarka ";
+    Tvarka = 1;
+}
     }
 
     if (ArMatuotiLaika()) {
