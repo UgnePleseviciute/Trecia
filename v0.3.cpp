@@ -3,11 +3,16 @@
 
 void Laikai(list<Studentas>& studentu){
 
+vector<Studentas> studentai;
+
 double sumaa;
 
-int Pasirinkimass, Tvarkaa;
 std::list<Studentas> vargsiuku;
 std::list<Studentas> kietiaku;
+int Pasirinkimass, Tvarkaa;
+
+    cout << "Listu" << endl;
+    cout<<endl;
 
     cout << "pasirinkite kaip duomenys bus isrusiuoti \n";
     cout << "1 - Pagal varda \n";
@@ -28,7 +33,7 @@ std::list<Studentas> kietiaku;
 
         cout << "Netinkamas pasirinkimas, rūšiuosime didejimo tvarka ";
         Tvarkaa = 1;
-}
+    }
 
     const std::list<int> studentCounts = {1000, 10000/*, 100000/*, 1000000, 10000000*/};
 
@@ -111,7 +116,10 @@ std::list<Studentas> kietiaku;
             cout<< endl;
             studentu.clear(); //isvalom lista
         }
+        PasirinktiVeiksma(studentai);
+
 }
+
 
 
 void GeneravimasListu(std::list<Studentas>& studentu) {

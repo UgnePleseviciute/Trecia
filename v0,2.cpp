@@ -2,37 +2,42 @@
 #include "Faprasai.h"
 
 void Antraa(vector<Studentas>& studentai) {
-    double visoLaikoTrukme = 0.0;  // Kintamasis laiko sumai
-    const vector<int> studentCounts = {1000/*, 10000, 100000, 1000000, 10000000*/};
+    double suma = 0.0;  // Kintamasis laiko sumai
+    const vector<int> studentCounts = {1000, 10000/*, 100000, 1000000, 10000000*/};
     string FailoPav;
     int Pasirinkimas, Tvarka;
 
-
+    int StudKiekis;
     vector<Studentas> vargsiukai;
     vector<Studentas> kietiakiai;
-
-    Generavimas(studentai);
+    cout << "Vektoriu" << endl;
+    cout<<endl;
 
     cout << "pasirinkite kaip duomenys bus isrusiuoti \n";
     cout << "1 - Pagal varda \n";
     cout << "2 - Pagal pavarde \n";
     cout << "3 - Pagal pazymius \n";
     cin >> Pasirinkimas;
-   if (Pasirinkimas != 1 && Pasirinkimas != 2 && Pasirinkimas != 3)
+    if (Pasirinkimas != 1 && Pasirinkimas != 2 && Pasirinkimas != 3)
 {
-    cout << "Netinkamas pasirinkimas, rūšiuosime pagal vardą ";
-    Pasirinkimas = 1;
+        cout << "Netinkamas pasirinkimas, rūšiuosime pagal vardą ";
+        Pasirinkimas = 1;
 }
 
-cout << "Pasirinkite kokia tvarka matuosime \n";
-cout << "1 - Didejimo \n";
-cout << "2 - Mazejimo \n";
-cin >> Tvarka;
-if (Tvarka != 1 && Tvarka != 2) {
-    cout << "Netinkamas pasirinkimas, rūšiuosime didejimo tvarka ";
-    Tvarka = 1;
-}
+    cout << "Pasirinkite kokia tvarka matuosime \n";
+    cout << "1 - Didejimo \n";
+    cout << "2 - Mazejimo \n";
+    cin >> Tvarka;
+    if (Tvarka != 1 && Tvarka != 2) {
+
+        cout << "Netinkamas pasirinkimas, rūšiuosime didejimo tvarka ";
+        Tvarka = 1;
     }
+
+    Generavimas(studentai);
+
+
+
 
     if (ArMatuotiLaika()) {
 
@@ -105,11 +110,16 @@ if (Tvarka != 1 && Tvarka != 2) {
             double vidutinisIsvestisKietiakiai = (matavimoLaikaiIsvestisKietiakiai[0] + matavimoLaikaiIsvestisKietiakiai[1] + matavimoLaikaiIsvestisKietiakiai[2]) / 3;
             double vidutinisIsrusiavimas = (matavimoLaikaiIsrusiavimui[0] + matavimoLaikaiIsrusiavimui[1] + matavimoLaikaiIsrusiavimui[2]) / 3;
 
+            suma = vidutinisIsrusiavimas + vidutinisIsvestisKietiakiai + vidutinisIsvestisVargsiukai + vidutinisNuskaitymas + vidutinisRikiavimas;
+
+
             cout << "Vidutinis nuskaitymo laikas (" << StudKiekis << " duomenu): " << vidutinisNuskaitymas << " s" << endl;
             cout << "Vidutinis isrusiavimo laikas ("  << StudKiekis << " duomenu): " <<  vidutinisIsrusiavimas << " s" << endl;
             cout << "Vidutinis iskaidymo laikas (" << StudKiekis << " duomenu): " << vidutinisRikiavimas << " s" << endl;
             cout << "Vidutinis isvedimo laikas vargsiukams (" << StudKiekis << " duomenu): " << vidutinisIsvestisVargsiukai << " s" << endl;
             cout << "Vidutinis isvedimo laikas kietiakiams (" << StudKiekis << " duomenu): " << vidutinisIsvestisKietiakiai << " s" << endl;
+            cout<< endl;
+            cout<< "bendra suma: " << suma;
             cout<< endl;
             studentai.clear(); //isvalom vektoriu
         }
@@ -229,15 +239,16 @@ void IsvestiDuomenis(const vector<Studentas>& studentai, const string& FailoPav)
 void MatuotiLaika(high_resolution_clock::time_point start, high_resolution_clock::time_point stop, const char* veiksmas) {
 
     auto duration = duration_cast<milliseconds>(stop - start);
-    double seconds = duration.count() / 10000.0;
+    double seconds = duration.count() / 1000.0;
 
     cout << veiksmas << " uztruko: " << fixed << setprecision(3) << seconds << " s" << endl;
 }
 
 void Generavimas(vector<Studentas>& studentai) {
+    double totalExecutionTime = 0.0;
 
     Studentas studentas;
-    const vector<int> studentCounts = {1000,/* 10000, 100000, 1000000, 10000000*/};
+    const vector<int> studentCounts = {1000, 10000/*, 100000/*, 1000000, 10000000*/};
 
     for (int StudKiekis : studentCounts) {
         auto start = high_resolution_clock::now();
@@ -256,13 +267,16 @@ void Generavimas(vector<Studentas>& studentai) {
         studentai.push_back(studentas);  // kiekvienas sugeneruotas studentas perduodamas vektoriui studentai, kur sis vektorius yra oerduodamas kaip funkcijos parametras
         }
 
-        string FailoPav = to_string(StudKiekis) + ".txt";
-        auto stop = high_resolution_clock::now();
-        cout << StudKiekis << " studentu" << endl;
-        MatuotiLaika(start, stop, "Duomenu generavimas");
-        IsvestiDuomenisIpagrFaila(studentai, FailoPav);
+    string FailoPav = to_string(StudKiekis) + ".txt";
+    auto stopGeneravimas = high_resolution_clock::now();
+    auto GeneravimoLaikas =duration_cast<std::chrono::milliseconds>(stopGeneravimas - start).count() / 1000.0;
+    cout << StudKiekis << " Generavimas uztruko "  << GeneravimoLaikas << " s" << endl  ;
+    IsvestiDuomenisIpagrFaila(studentai, FailoPav);
 
-        studentai.clear();
+    studentai.clear();
+    totalExecutionTime = AddTimeToTotalExecutionTime(totalExecutionTime, start, stopGeneravimas);
+
+
     }
 }
 
@@ -305,5 +319,31 @@ void RikiavimoMeniu(vector<Studentas>& studentai, vector<Studentas>& vargsiukai,
         sort(studentai.begin(), studentai.end(), CompareByBalas1);
         sort(vargsiukai.begin(), vargsiukai.end(), CompareByBalas1);
         sort(kietiakiai.begin(), kietiakiai.end(), CompareByBalas1);
+    }
+}
+double AddTimeToTotalExecutionTime(double total, high_resolution_clock::time_point start, high_resolution_clock::time_point stop) {
+    auto executionTime = duration_cast<milliseconds>(stop - start).count() / 1000.0;
+    return total + executionTime;
+}
+bool Pasirinkti()
+{
+    vector<Studentas> studentai;
+
+    char Listu;
+    cout << "Ar norite sugeneruoti duomenis naudojant  listus? [T/N]: " <<endl;
+    cout << "Jei N - tai generuosime duomenis naudojant vektorius\n" <<endl;
+    cin >> Listu;
+
+    if (Listu == 'T' || Listu == 't')
+    {
+        std::list<Studentas> studentu; // Sukurti sąrašą studentams
+        Laikai(studentu); // Iškviesti funkciją su sąrašu
+    }
+    else if (Listu == 'N' || Listu == 'n')
+    {
+        Antraa(studentai);
+    }
+    else {
+        PasirinktiVeiksma(studentai);
     }
 }
