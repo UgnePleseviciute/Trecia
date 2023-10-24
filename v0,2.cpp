@@ -10,8 +10,18 @@ void Antraa(vector<Studentas>& studentai) {
     int StudKiekis;
     vector<Studentas> vargsiukai;
     vector<Studentas> kietiakiai;
+
     cout << "Vektoriu" << endl;
     cout<<endl;
+
+    char Generavimaas;
+    cout << "ar norite generuoti failus [t/n]: " << endl;
+    cin >> Generavimaas;
+
+    if (Generavimaas == 't' || Generavimaas == 'T') {
+    Generavimas(studentai);
+    }
+
 
     cout << "pasirinkite kaip duomenys bus isrusiuoti \n";
     cout << "1 - Pagal varda \n";
@@ -34,12 +44,10 @@ void Antraa(vector<Studentas>& studentai) {
         Tvarka = 1;
     }
 
-    Generavimas(studentai);
 
 
 
 
-    if (ArMatuotiLaika()) {
 
         for (int StudKiekis : studentCounts) {
             cout << "Studentu kiekis: " << StudKiekis << " duomenu" << endl;
@@ -118,14 +126,13 @@ void Antraa(vector<Studentas>& studentai) {
             cout << "Vidutinis iskaidymo laikas (" << StudKiekis << " duomenu): " << vidutinisRikiavimas << " s" << endl;
             cout << "Vidutinis isvedimo laikas vargsiukams (" << StudKiekis << " duomenu): " << vidutinisIsvestisVargsiukai << " s" << endl;
             cout << "Vidutinis isvedimo laikas kietiakiams (" << StudKiekis << " duomenu): " << vidutinisIsvestisKietiakiai << " s" << endl;
-            cout<< endl;
-            cout<< "bendra suma: " << suma;
+            cout<< "bendra suma: " << suma << endl;
             cout<< endl;
             studentai.clear(); //isvalom vektoriu
         }
 
 
-    }
+
     PasirinktiVeiksma(studentai);
 }
 
@@ -236,19 +243,19 @@ void IsvestiDuomenis(const vector<Studentas>& studentai, const string& FailoPav)
     }
 }
 
-void MatuotiLaika(high_resolution_clock::time_point start, high_resolution_clock::time_point stop, const char* veiksmas) {
+/*void MatuotiLaika(high_resolution_clock::time_point start, high_resolution_clock::time_point stop, const char* veiksmas) {
 
     auto duration = duration_cast<milliseconds>(stop - start);
     double seconds = duration.count() / 1000.0;
 
     cout << veiksmas << " uztruko: " << fixed << setprecision(3) << seconds << " s" << endl;
-}
+}*/
 
 void Generavimas(vector<Studentas>& studentai) {
     double totalExecutionTime = 0.0;
 
     Studentas studentas;
-    const vector<int> studentCounts = {1000, 10000/*, 100000/*, 1000000, 10000000*/};
+    const vector<int> studentCounts = {1000, 10000/*, 100000, 1000000, 10000000*/};
 
     for (int StudKiekis : studentCounts) {
         auto start = high_resolution_clock::now();
@@ -274,19 +281,10 @@ void Generavimas(vector<Studentas>& studentai) {
     IsvestiDuomenisIpagrFaila(studentai, FailoPav);
 
     studentai.clear();
-    totalExecutionTime = AddTimeToTotalExecutionTime(totalExecutionTime, start, stopGeneravimas);
-
 
     }
 }
 
-bool ArMatuotiLaika() {
-
-    char atsakymas;
-    cout << "Ar norite matuoti laika (t/n)? ";
-    cin >> atsakymas;
-    return (atsakymas == 't' || atsakymas == 'T');
-}
 
 void RikiavimoMeniu(vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakiai, int Pasirinkimas, int Tvarka) {
 
@@ -321,12 +319,8 @@ void RikiavimoMeniu(vector<Studentas>& studentai, vector<Studentas>& vargsiukai,
         sort(kietiakiai.begin(), kietiakiai.end(), CompareByBalas1);
     }
 }
-double AddTimeToTotalExecutionTime(double total, high_resolution_clock::time_point start, high_resolution_clock::time_point stop) {
-    auto executionTime = duration_cast<milliseconds>(stop - start).count() / 1000.0;
-    return total + executionTime;
-}
-bool Pasirinkti()
-{
+
+bool Pasirinkti() {
     vector<Studentas> studentai;
 
     char Listu;

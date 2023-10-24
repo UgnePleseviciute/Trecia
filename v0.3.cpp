@@ -35,11 +35,20 @@ int Pasirinkimass, Tvarkaa;
         Tvarkaa = 1;
     }
 
-    const std::list<int> studentCounts = {1000, 10000/*, 100000/*, 1000000, 10000000*/};
+    const std::list<int> studentCounts = {1000, 10000, 100000, 1000000, 10000000};
 
+
+    char generavimaas;
+    cout << "ar norite generuoti failus [t/n]: " << endl;
+    cin >> generavimaas;
+
+if (generavimaas == 't' || generavimaas == 'T') {
     GeneravimasListu(studentu);
+}
 
     for (int StudKiekis : studentCounts) {
+            cout << "Studentu kiekis: " << StudKiekis << " duomenu" << endl;
+
             double matavimoLaikaiNuskaitymass[3] = {0};
             double matavimoLaikaiRikiavimass[3] = {0};
             double matavimoLaikaiIsvestisVargsiukaii[3] = {0};
@@ -125,7 +134,7 @@ int Pasirinkimass, Tvarkaa;
 void GeneravimasListu(std::list<Studentas>& studentu) {
         double totalExecutionTime = 0.0;
 
-        const std::list<int> studentCounts = {1000, 10000/*, 100000/*, 1000000, 10000000*/};
+        const std::list<int> studentCounts = {1000, 10000/*, 100000, 1000000, 10000000*/};
 
         for (int StudKiekis : studentCounts) {
 
@@ -147,7 +156,6 @@ void GeneravimasListu(std::list<Studentas>& studentu) {
         string FailoPava = to_string(StudKiekis) +"L_"+  ".txt";
         auto stopGeneravimas = high_resolution_clock::now();
         auto GeneravimoLaikas = duration_cast<std::chrono::milliseconds>(stopGeneravimas - start).count() / 1000.0;
-        totalExecutionTime = AddTimeToTotalExecutionTime(totalExecutionTime, start, stopGeneravimas);
 
         auto startIsvedimas = high_resolution_clock::now();
 
@@ -187,7 +195,7 @@ void NuskaitytiDuomenisListo(const string& FailoPava, std::list<Studentas>& stud
 
 
     ifstream inFile(FailoPava);
-    const std::list<int> studentCounts = {1000, 10000/*, 100000/*, 1000000, 10000000*/};
+    const std::list<int> studentCounts = {1000, 10000, 100000, 1000000, 10000000};
 
     for (int StudKiekis : studentCounts) {
         string FailoPav = to_string(StudKiekis) + "L_" + ".txt"; // Pataisytas failo pavadinimas
@@ -271,11 +279,11 @@ void IsvestiDuomenisListo(const std::list<Studentas>& studentu, const std::strin
         const int pavardeWidth = 30;
         const int galutinisWidth = 20;
 
-        outFile << std::left << std::setw(vardasWidth) << "Vardas" <<  std::setw(pavardeWidth) << "Pavarde" ;
+        outFile << std::left << std::setw(10) << "Adresas" << std::setw(vardasWidth) << "Vardas" <<  std::setw(pavardeWidth) << "Pavarde" ;
         outFile << std::setw(galutinisWidth) << "Galutinis (Vid)" << std::endl;
 
         for (const Studentas& studentas : studentu) {
-            outFile << std::left << std::setw(vardasWidth) << studentas.Vardas <<  std::setw(pavardeWidth) << studentas.Pavarde ;
+            outFile << &studentas << " " << std::left << std::setw(vardasWidth) << studentas.Vardas <<  std::setw(pavardeWidth) << studentas.Pavarde ;
             outFile << std::setw(galutinisWidth) << std::fixed << std::setprecision(2) << studentas.GalutinisB << std::endl;
         }
 
@@ -284,5 +292,6 @@ void IsvestiDuomenisListo(const std::list<Studentas>& studentu, const std::strin
         std::cout << "Nepavyko atidaryti failo:  " << FailoPava << std::endl;
     }
 }
+
 
 
