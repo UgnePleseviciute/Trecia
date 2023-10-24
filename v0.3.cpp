@@ -283,7 +283,7 @@ void IsvestiDuomenisListo(const std::list<Studentas>& studentu, const std::strin
         outFile << std::setw(galutinisWidth) << "Galutinis (Vid)" << std::endl;
 
         for (const Studentas& studentas : studentu) {
-            outFile << &studentas << " " << std::left << std::setw(vardasWidth) << studentas.Vardas <<  std::setw(pavardeWidth) << studentas.Pavarde ;
+            outFile << std::left << std::setw(vardasWidth) << studentas.Vardas <<  std::setw(pavardeWidth) << studentas.Pavarde ;
             outFile << std::setw(galutinisWidth) << std::fixed << std::setprecision(2) << studentas.GalutinisB << std::endl;
         }
 

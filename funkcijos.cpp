@@ -3,7 +3,7 @@
 
 
 void PasirinktiVeiksma(vector<Studentas>& studentai) { // priima studentu objektu vektoriu kaip argumenta
-
+    int Pasirinkimas, Tvarka;
     char pasirinkimas;
     cout << "Pasirinkite kaip vesime duomenis (1 - nuskaityta bus is failo, 2 - duomenis reiks ivesti ranka),3 - Studentu sarasas bus sugeneruotas automatiskai ir parodyti laikai kiek uztruko, 4 - Baigti programa: ";
     cin >> pasirinkimas;
@@ -15,12 +15,10 @@ void PasirinktiVeiksma(vector<Studentas>& studentai) { // priima studentu objekt
         read_from_file(mok, &pazymiu_sk); // kvieciama funkcija kuri nuskaito studentu duomenis is failo ir juos saugo vektoriujyje
         IsvedimasLenteles(mok);  // kviecia funkcija kuri isveda studentu duomenis i lentele
         sort(mok.begin(), mok.end(), CompareByVardas); // surusiuojami studentu duomenys pagal varda
-    } else if (pasirinkimas == '2') {  // vesime ranka
-
-        char SkaiciavimoBudas; // saugomas vartojotojo pasirinkintas skaiciavimo budas
+} else if (pasirinkimas == '2') {  // vesime ranka
+        char SkaiciavimoBudas;
         cout << "Pasirinkite skaiciavimo metoda (V- Vidurkis, M - Mediana): ";
         cin >> SkaiciavimoBudas;
-        cout << endl;
 
         if (SkaiciavimoBudas != 'V' && SkaiciavimoBudas != 'v' && SkaiciavimoBudas != 'M' && SkaiciavimoBudas != 'm') {
             cout << "Nesuprantama ivesti, naudosime Vidurki pagal Defaulta." << endl;
@@ -29,20 +27,26 @@ void PasirinktiVeiksma(vector<Studentas>& studentai) { // priima studentu objekt
 
         char PridetiDarViena;
         do {
-            Studentas studentas; // sukuriamas naujas studento objektas
-            studentas.SkaiciavimoBudas = SkaiciavimoBudas; // nustatomas studento pasirinktas skaiciavimo budas pagala naudotojo pasirinkima
+            Studentas studentas;
+            studentas.SkaiciavimoBudas = SkaiciavimoBudas;
             StudentoDuomenys(studentas); // Kviečiama funkcija, kurioje vyksta studento duomenų įvedimas
-            studentai.push_back(studentas); // pridedamas naujas studentas prei studentu vektoriaus "studentai"
+            studentai.push_back(studentas);
 
             cout << "Ar nortite prideti dar viena studenta? (T - Taip, N - Ne) ";
             cin >> PridetiDarViena;
         } while (PridetiDarViena == 'T' || PridetiDarViena == 't');
 
-        sort(studentai.begin(), studentai.end(), CompareByVardas); // surusiuojama pagal varda
-        cout << "Studentu duomenys ir galutiniai balai:" << endl; }
+        std::sort(studentai.begin(), studentai.end(), CompareByVardas);
+        cout << "Studentu duomenys ir galutiniai balai:" << endl;
+        bool isHeader = true;
+        for (const Studentas& student : studentai) {
+            Isvedimas(student, isHeader); // Kviečiama funkcija, kuri spausdina duomenis
+            isHeader = false;
+        }
+    }
 
     else if (pasirinkimas == '3') { // jei pasirinkimas 3 kviecia antrai funkcija
-         Antraa(studentai);
+         Pasirinkti();
 
     }
     else if (pasirinkimas == '4') { // jei 4 baigia programos veikima
@@ -56,6 +60,7 @@ void StudentoDuomenys(Studentas& studentas) { // nuoroda funkcijos  i studentas 
     cout << "Iveskite studento pavarde: ";
     cin >> studentas.Pavarde;
 
+    cout << "Studento objekto adresas atmintyje: " << &studentas << endl; //pridetas atminties adresas
     string Random;
     cout << "Generuoti atsitiktinius pazymius (Taip/Ne)? ";
     cin >> Random;
