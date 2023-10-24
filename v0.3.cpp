@@ -3,6 +3,7 @@
 
 void Laikai(list<Studentas>& studentu){
 
+double sumaa;
 
 int Pasirinkimass, Tvarkaa;
 std::list<Studentas> vargsiuku;
@@ -34,12 +35,11 @@ std::list<Studentas> kietiaku;
     GeneravimasListu(studentu);
 
     for (int StudKiekis : studentCounts) {
-            cout << "Studentu kiekis: " << StudKiekis << " duomenu" << endl;
             double matavimoLaikaiNuskaitymass[3] = {0};
             double matavimoLaikaiRikiavimass[3] = {0};
             double matavimoLaikaiIsvestisVargsiukaii[3] = {0};
             double matavimoLaikaiIsvestisKietiakiaii[3] = {0};
-            double matavimoLaikaiIsrusiavimui[3] = {0};
+            double matavimoLaikaiIsrusiavimuii[3] = {0};
             for (int i = 0; i < 3; ++i) {
 
 //----------------------------------------------------------------------------------------------------------------------------------------------------
@@ -52,20 +52,66 @@ std::list<Studentas> kietiaku;
                 auto nuskaitymoLaikass = duration_cast<milliseconds>(stopNuskaitymass - startNuskaitymass).count() / 1000.0;
                 matavimoLaikaiNuskaitymass[i] = nuskaitymoLaikass;
 //----------------------------------------------------------------------------------------------------------------------------------------------------
-                auto startIsrusiavimas = high_resolution_clock::now();
+                auto startIsrusiavimass = high_resolution_clock::now();
 
                 RikiavimoMeniuListo(studentu,vargsiuku, kietiaku, Pasirinkimass, Tvarkaa);
 
-                auto stopIsrusiavimas = high_resolution_clock::now();
-                auto IsrusiavimoLaikas = duration_cast<milliseconds>(stopIsrusiavimas - startIsrusiavimas).count() / 1000.0;
-                matavimoLaikaiIsrusiavimui[i] = IsrusiavimoLaikas;
+                auto stopIsrusiavimass = high_resolution_clock::now();
+                auto IsrusiavimoLaikas = duration_cast<milliseconds>(stopIsrusiavimass - startIsrusiavimass).count() / 1000.0;
+                matavimoLaikaiIsrusiavimuii[i] = IsrusiavimoLaikas;
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+                auto startRikiavimass = high_resolution_clock::now();
+
+                RikiuotiStudentuss(studentu, vargsiuku, kietiaku);
+
+                auto stopRikiavimass = high_resolution_clock::now();
+                auto rikiavimoLaikas = duration_cast<milliseconds>(stopRikiavimass - startRikiavimass).count() / 1000.0;
+                matavimoLaikaiRikiavimass[i] = rikiavimoLaikas;
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+                auto startIsvestisVargsiukaii = high_resolution_clock::now();
+
+                IsvestiDuomenisListo(vargsiuku, "vargsiukai_" + to_string(vargsiuku.size()) + "_L_" + to_string(StudKiekis));
+                vargsiuku.clear();
+
+                auto stopIsvestisVargsiukaii = high_resolution_clock::now();
+                auto isvestiesLaikasVargsiukaii = duration_cast<milliseconds>(stopIsvestisVargsiukaii - startIsvestisVargsiukaii).count() / 1000.0;
+                matavimoLaikaiIsvestisVargsiukaii[i] = isvestiesLaikasVargsiukaii;
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+
+                auto startIsvestisKietiakiaii = high_resolution_clock::now();
+
+                IsvestiDuomenisListo(kietiaku, "kietiakiai_" + to_string(kietiaku.size()) + "_" +to_string(StudKiekis));
+                kietiaku.clear();
+
+                auto stopIsvestisKietiakiaii = high_resolution_clock::now();
+                auto isvestiesLaikasKietiakiaii = duration_cast<milliseconds>(stopIsvestisKietiakiaii - startIsvestisKietiakiaii).count( ) / 1000.0;
+                matavimoLaikaiIsvestisKietiakiaii[i] = isvestiesLaikasKietiakiaii;
+
+//----------------------------------------------------------------------------------------------------------------------------------------------------
+            }
+
+            double vidutinisNuskaitymass = (matavimoLaikaiNuskaitymass[0] + matavimoLaikaiNuskaitymass[1] + matavimoLaikaiNuskaitymass[2]) / 3;
+            double vidutinisRikiavimass = (matavimoLaikaiRikiavimass[0] + matavimoLaikaiRikiavimass[1] + matavimoLaikaiRikiavimass[2]) / 3;
+            double vidutinisIsvestisVargsiukaii = (matavimoLaikaiIsvestisVargsiukaii[0] + matavimoLaikaiIsvestisVargsiukaii[1] + matavimoLaikaiIsvestisVargsiukaii[2]) / 3;
+            double vidutinisIsvestisKietiakiaii = (matavimoLaikaiIsvestisKietiakiaii[0] + matavimoLaikaiIsvestisKietiakiaii[1] + matavimoLaikaiIsvestisKietiakiaii[2]) / 3;
+            double vidutinisIsrusiavimass = (matavimoLaikaiIsrusiavimuii[0] + matavimoLaikaiIsrusiavimuii[1] + matavimoLaikaiIsrusiavimuii[2]) / 3;
+
+            sumaa = vidutinisIsrusiavimass + vidutinisIsvestisKietiakiaii + vidutinisIsvestisVargsiukaii + vidutinisNuskaitymass + vidutinisRikiavimass;
 
 
-
+            cout << "Vidutinis nuskaitymo laikas (" << StudKiekis << " duomenu): " << vidutinisNuskaitymass << " s" << endl;
+            cout << "Vidutinis isrusiavimo laikas ("  << StudKiekis << " duomenu): " <<  vidutinisIsrusiavimass << " s" << endl;
+            cout << "Vidutinis iskaidymo laikas (" << StudKiekis << " duomenu): " << vidutinisRikiavimass << " s" << endl;
+            cout << "Vidutinis isvedimo laikas vargsiukams (" << StudKiekis << " duomenu): " << vidutinisIsvestisVargsiukaii << " s" << endl;
+            cout << "Vidutinis isvedimo laikas kietiakiams (" << StudKiekis << " duomenu): " << vidutinisIsvestisKietiakiaii << " s" << endl;
+            cout<< "bendra suma: " << sumaa << endl;;
+            cout<< endl;
+            studentu.clear(); //isvalom lista
+        }
 }
-    }
-}
-
 
 
 void GeneravimasListu(std::list<Studentas>& studentu) {
@@ -107,7 +153,7 @@ void GeneravimasListu(std::list<Studentas>& studentu) {
         outFile << left << setw(vardasWidth) << "Vardas" <<  setw(pavardeWidth) << "Pavarde" ;
         outFile << setw(galutinisWidth) << "Galutinis (Vid)" << endl;
 
-        for (const Studentas& studentas : studentu) { // Pakeistas sąrašo pavadinimas
+        for (const Studentas& studentas : studentu) {
             outFile << left << setw(vardasWidth) << studentas.Vardas <<  setw(pavardeWidth) << studentas.Pavarde ;
             outFile << setw(galutinisWidth) << std::fixed << setprecision(2) << studentas.GalutinisB << endl;
         }
@@ -151,7 +197,7 @@ void NuskaitytiDuomenisListo(const string& FailoPava, std::list<Studentas>& stud
             istringstream iss(line);
             Studentas studentas;
             iss >> studentas.Vardas >> studentas.Pavarde >> studentas.GalutinisB;
-            studentu.push_back(studentas); // Pataisytas šios eilutės tipas
+            studentu.push_back(studentas);
         }
 
         inFile.close();
@@ -195,7 +241,40 @@ void RikiavimoMeniuListo(std::list<Studentas>& studentu, std::list<Studentas>& v
 }
 
 
+void RikiuotiStudentuss(std::list<Studentas>& studentu, std::list<Studentas>& vargsiuku, std::list<Studentas>& kietiaku) {
+    for (std::list<Studentas>::iterator it = studentu.begin(); it != studentu.end();) {
+        std::list<Studentas>::iterator current = it++;
+        if (current->GalutinisB < 5.0 && current->GalutinisB > 0.0) {
+            vargsiuku.push_back(*current);
+            studentu.erase(current);
+        } else if (current->GalutinisB >= 5 && current->GalutinisB <= 10) {
+            kietiaku.push_back(*current);
+            studentu.erase(current);
+        }
+    }
+}
 
 
+void IsvestiDuomenisListo(const std::list<Studentas>& studentu, const std::string& FailoPava) {
+    std::ofstream outFile(FailoPava);
+
+    if (outFile.is_open()) {
+        const int vardasWidth = 30;
+        const int pavardeWidth = 30;
+        const int galutinisWidth = 20;
+
+        outFile << std::left << std::setw(vardasWidth) << "Vardas" <<  std::setw(pavardeWidth) << "Pavarde" ;
+        outFile << std::setw(galutinisWidth) << "Galutinis (Vid)" << std::endl;
+
+        for (const Studentas& studentas : studentu) {
+            outFile << std::left << std::setw(vardasWidth) << studentas.Vardas <<  std::setw(pavardeWidth) << studentas.Pavarde ;
+            outFile << std::setw(galutinisWidth) << std::fixed << std::setprecision(2) << studentas.GalutinisB << std::endl;
+        }
+
+        outFile.close();
+    } else {
+        std::cout << "Nepavyko atidaryti failo:  " << FailoPava << std::endl;
+    }
+}
 
 
