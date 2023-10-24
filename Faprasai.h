@@ -1,6 +1,8 @@
 #ifndef FAPRASAI_H_INCLUDED
 #define FAPRASAI_H_INCLUDED
 
+#include "stu.h"
+
 double GalutinisBalas(const Studentas& studentas);
 void Isvedimas(const Studentas& studentas, bool isHeader);
 void StudentoDuomenys(Studentas& studentas);
@@ -28,6 +30,23 @@ void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiuk
 void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, const string& FailoPav);
 void IsvestiDuomenis(const vector<Studentas>& studentai, const string& FailoPav);
 void RikiavimoMeniu(vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakiai, int Pasirinkimas, int Tvarka);
+
+
+void Laikai(list<Studentas>& studentu);
+void GeneravimasListu(std::list<Studentas>& studentu);
+void IsvestiDuomenisIpagrFailaListu(const std::list<Studentas>& studentu, const std::string& FailoPav);
+void NuskaitytiDuomenisListo(const string& FailoPav, std::list<Studentas>& studentai);
+void NuskaitytiVisusFailusListo(std::list<Studentas>& studentai);
+void RikiavimoMeniuListo(std::list<Studentas>& studentu, std::list<Studentas>& vargsiuku, std::list<Studentas>& kietiaku, int Pasirinkimas, int Tvarka);
+void RikiuotiStudentuss(std::list<Studentas>& studentu, std::list<Studentas>& vargsiuku, std::list<Studentas>& kietiaku);
+void IsvestiDuomenisListo(const std::list<Studentas>& studentu, const std::string& FailoPava);
+bool Pasirinkti();
+
+
+
+
+
+
 
 
 

@@ -19,6 +19,7 @@
 #include <stdexcept>
 #include <chrono>
 #include <cstdlib>
+#include <list>
 
 
 using std::cout;
@@ -49,6 +50,8 @@ using std::srand;
 using std::random_shuffle;
 using std::ofstream;
 using namespace std::chrono;
+
+using std::list;
 
 struct Studentas {
     string Vardas;
