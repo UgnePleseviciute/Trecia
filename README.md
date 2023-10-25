@@ -41,4 +41,4 @@ Naudojant vektorius:
 
 ![image](https://github.com/UgnePleseviciute/PirmaVersija/assets/145859423/33f621af-fe47-414e-adb4-f564d94ee3f5)
 
-
+Pagal pateiktas nuotraukas galime pastbėti, kad testavimo laikai skirasi labai ne daug
