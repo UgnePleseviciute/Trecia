@@ -25,7 +25,6 @@ void GenerateStudentData(vector <Studentas>& studentai);
 void Antraa(vector<Studentas>& studentai);
 void NuskaitytiDuomenis(const string& FailoPav, vector<Studentas>& studentai);
 void NuskaitytiVisusFailus(std::vector<Studentas>& studentai);
-bool ArMatuotiLaika();
 void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakiai);
 void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, const string& FailoPav);
 void IsvestiDuomenis(const vector<Studentas>& studentai, const string& FailoPav);
