@@ -7,6 +7,15 @@
      1.2.2 Jei pasirenkama generuoti automatiškai( įvedus Taip) ND bei egzamino rez. yra sugeneruojami automatiškai ir klausiama ar norite pridėti dar vieną studentą. (pasirinkus taip iš naujo vedami studento vardas, pavardė, bei klausiama kaip bus įvedami pažymiai)
      1.2.3 Jei pasirenkama pažymius vesti automatiškai, tai vartotojas gali juos vesti iki tol kol suves (-1). Įvedus -1 klausiama papildoma užklausa ar tikrai norisi baikti vesti pažymius pasirinkus Taip(T) prašoma suvesti egzamino rezultatą ir tada klausiama ar norime įvesti dar vieną studentą.
    1.2.4 Pasirinkus nebepridėti nuajo studento apsakičiuojama mediana su vidurkiu (priklausomai nuo vartotojo pasirinkimo) ir išvedamas galutnis balas į lentelę.
+    
+3. Naudotojui pasirinkus 3 - pasirinkimo variantą automatiškai sugeneruojami 5 failai su 1 000, 10 000, 100 000, 1 000 000, 10 000 000 įrašų. Kai sugeneruojamas kiekvienas failas pateikiama kiek laiko užtruko sugeneruoti toki kiekį eilučių ir kiek laiko užtruko išrašyti tas eilutes į faila.
+Naudotojui suteikiama galimybė pasirinkti kaip norės kad duomenys būtų išrušiuoti
+2.1 Pasirinkimus sudaro 1- Pagal vardą, 2 - pagal pavardę 3- pagal galutinį balą.
+2.1.1 Suteikia galimybė pasirinkti ar duomenys pagal prieš tai pasirinkta parametrą bus išdėstyti didėjimo(1) ar mažėjimo(2) tvarka.
+Paklausiama naudotojo ar nori matuoti laikus tam tikrų funkcijų
+Rezultate pateikiami kiek kiekvieną veiksmą truko atlikti laikų vidurkiai. T.y. testuojama viska tris kartus ir tada pateikiamas šių laikų vidurkis.
+
+![image](https://github.com/UgnePleseviciute/PirmaVersija/assets/145859423/83c95d2b-621d-4786-96cc-1803362ff210)
 
     
     
