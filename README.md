@@ -34,7 +34,7 @@ HDD : OS (C:) NTFS,  476,13 GB
 
 Naudojant Listus :
 
-![image](https://github.com/UgnePleseviciute/PirmaVersija/assets/145859423/793b49a5-9d54-40e4-8b7e-364477bf33c7)
+![image](https://github.com/UgnePleseviciute/PirmaVersija/assets/145859423/08dd29d3-e259-4159-bb76-8ba32664e90d)
 
 
 Naudojant vektorius: 
