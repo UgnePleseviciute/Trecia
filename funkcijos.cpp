@@ -161,25 +161,25 @@ double GalutinisBalas(const Studentas& studentas) {
     }
 }
 
-void Isvedimas(const Studentas& studentas, bool isHeader) {
-    if (isHeader) {
-        int tableWidth = 72;
-        cout << string(tableWidth, '-') << endl;
-        cout << "| " << left << setw(20) << "Vardas" << " | " << setw(20) << "Pavarde" << " | ";
-        if (studentas.SkaiciavimoBudas == 'V' || studentas.SkaiciavimoBudas == 'v') {
-            cout << setw(20) << "Galutinis (Vid)" << " |" << endl;
-        } else {
-            cout << setw(20) << "Galutinis (Med)" << " |" << endl;
+    void Isvedimas(const Studentas& studentas, bool isHeader) {
+        if (isHeader) {
+            int tableWidth = 72;
+            cout << string(tableWidth, '-') << endl;
+            cout << "| " << left << setw(20) << "Vardas" << " | " << setw(20) << "Pavarde" << " | ";
+            if (studentas.SkaiciavimoBudas == 'V' || studentas.SkaiciavimoBudas == 'v') {
+                cout << setw(20) << "Galutinis (Vid)" << " |" << endl;
+            } else {
+                cout << setw(20) << "Galutinis (Med)" << " |" << endl;
+            }
+            cout << string(tableWidth, '-') << endl;
         }
-        cout << string(tableWidth, '-') << endl;
-    }
 
-    cout << "| " << left << setw(20) << studentas.Vardas << " | " << setw(20)
-        << studentas.Pavarde << " | ";
+        cout << "| " << left << setw(20) << studentas.Vardas << " | " << setw(20)
+            << studentas.Pavarde << " | ";
 
-    if (studentas.SkaiciavimoBudas == 'V' || studentas.SkaiciavimoBudas == 'v') {
-        cout << setw(20) << fixed << setprecision(2) << GalutinisBalas(studentas) << " |" << endl;
-    } else {
-        cout << setw(20) << fixed << setprecision(2) << GalutinisBalas(studentas) << " |" << endl;
+        if (studentas.SkaiciavimoBudas == 'V' || studentas.SkaiciavimoBudas == 'v') {
+            cout << setw(20) << fixed << setprecision(2) << GalutinisBalas(studentas) << " |" << endl;
+        } else {
+            cout << setw(20) << fixed << setprecision(2) << GalutinisBalas(studentas) << " |" << endl;
+        }
     }
-}

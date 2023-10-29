@@ -40,9 +40,13 @@ void RikiavimoMeniuListo(std::list<Studentas>& studentu, std::list<Studentas>& v
 void RikiuotiStudentuss(std::list<Studentas>& studentu, std::list<Studentas>& vargsiuku, std::list<Studentas>& kietiaku);
 void IsvestiDuomenisListo(const std::list<Studentas>& studentu, const std::string& FailoPava);
 bool Pasirinkti();
+double CalculateGalutinisB(const Studentas& studentas);
 
 
+double CalculateGalutinisBlISTO(const Studentas& studentas);
 
+
+void NuskaitytiVisusFailusListo(list<Studentas>& studentu);
 
 
 

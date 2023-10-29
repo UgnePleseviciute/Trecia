@@ -61,8 +61,10 @@ if (Tvarka != 1 && Tvarka != 2) {
                 auto stopNuskaitymas = high_resolution_clock::now();
                 auto nuskaitymoLaikas = duration_cast<milliseconds>(stopNuskaitymas - startNuskaitymas).count() / 1000.0;
                 matavimoLaikaiNuskaitymas[i] = nuskaitymoLaikas;
-
- //----------------------------------------------------------------------------------------------------------------------------------------------------
+for (Studentas& studentas : studentai) {
+    double galutinisB = CalculateGalutinisB(studentas);
+    studentas.GalutinisB = galutinisB;
+} //----------------------------------------------------------------------------------------------------------------------------------------------------
                 auto startIsrusiavimas = high_resolution_clock::now();
 
                 RikiavimoMeniu(studentai,vargsiukai, kietiakiai, Pasirinkimas, Tvarka);
@@ -70,7 +72,6 @@ if (Tvarka != 1 && Tvarka != 2) {
                 auto stopIsrusiavimas = high_resolution_clock::now();
                 auto IsrusiavimoLaikas = duration_cast<milliseconds>(stopIsrusiavimas - startIsrusiavimas).count() / 1000.0;
                 matavimoLaikaiIsrusiavimui[i] = IsrusiavimoLaikas;
-
 //----------------------------------------------------------------------------------------------------------------------------------------------------
                 auto startRikiavimas = high_resolution_clock::now();
 
@@ -126,6 +127,16 @@ if (Tvarka != 1 && Tvarka != 2) {
     PasirinktiVeiksma(studentai);
 }
 
+double CalculateGalutinisB(const Studentas& studentas) {
+    int totalHomework = 0;
+    for (int nd : studentas.ND) {
+        totalHomework += nd;
+    }
+
+    return 0.4 * static_cast<double>(totalHomework) / studentas.ND.size() + 0.6 * studentas.Egzas;
+}
+
+
 void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakiai) {
     //skirtymas i dvi grupes
     for (const Studentas& studentas : studentai) {
@@ -150,35 +161,56 @@ void NuskaitytiVisusFailus(vector<Studentas>& studentai) {
 }
 
 void NuskaitytiDuomenis(const string& FailoPav, vector<Studentas>& studentai) {
+    int student_counter = 0;
+    int temp;
+    ifstream fileRead;
+    string buff;
+    try {
+        fileRead.open(FailoPav); // Use the provided file name
 
-    ifstream inFile(FailoPav);
-
-    if (inFile.is_open()) {
-        string line;
-        bool praleisti = true; // Pradeti praleisti eilutes
-
-        while (getline(inFile, line)) {
-            if (praleisti) {
-                praleisti = false; // daugiau nepraleidzia eiluciu
-                continue; // Praleisti sia eilute ir eiti toliau
-            }
-            istringstream iss(line); // Tai yra "input string stream" klasė, kuri leidžia jums skaityti duomenis iš teksto eilutės kaip iš tekstinio srauto. Ši klasė yra naudinga, kai turite tekstinę eilutę, kurią norite išskaidyti į atskirus duomenis, pvz., skaičius arba žodžius.
-            Studentas studentas;
-            iss >> studentas.Vardas >> studentas.Pavarde >> studentas.GalutinisB; //nuskaito viska ir prideda studentai vektoriu
-            studentai.push_back(studentas);
-           // cout << line << endl;
+        if (!fileRead.is_open()) {
+            throw invalid_argument("Failas '" + FailoPav + "' neegzistuoja arba negali buti atidarytas!");
         }
 
-        inFile.close(); //baigus skaityti uzdaro faila
-    } else {
-        cout << "Nepavyko atidaryti failo." << endl;
-    }
-   /* cout << "Contents of studentai vector after reading the file:" << endl;
-    for (const Studentas& studentas : studentai) {
-        cout << "Vardas: " << studentas.Vardas << ", Pavarde: " << studentas.Pavarde << ", GalutinisB: " << studentas.GalutinisB << endl;
-    }*/
+        if (fileRead.is_open()) {
+            getline(fileRead >> ws, buff);
 
+            // Calculate the number of "ND" columns
+            int pazymiu_sk = countWordsInString(buff) - 2; // Assuming "Vardas" and "Pavarde"
+
+            while (true) {
+                studentai.resize(studentai.size() + 1);
+                fileRead >> studentai.at(student_counter).Vardas;
+
+                if (fileRead.eof()) {
+                    break;
+                }
+
+                fileRead >> studentai.at(student_counter).Pavarde;
+
+                for (int i = 0; i < pazymiu_sk; i++) {
+                    if (!(fileRead >> temp)) {
+                        cout << "Klaida nuskaitant pazymi " << i + 1 << " studento " << studentai.at(student_counter).Vardas << " " << studentai.at(student_counter).Pavarde << endl;
+                        studentai.pop_back();
+                        break;
+                    }
+                    studentai.at(student_counter).ND.push_back(temp);
+                    //cout << "Read Vardas: " << studentai.at(student_counter).Vardas << " Pavarde: " << studentai.at(student_counter).Pavarde << " ND[" << i << "]: " << temp << endl;
+
+                }
+
+                fileRead >> studentai.at(student_counter).Egzas;
+                student_counter++;
+            }
+        } else {
+            cout << "Klaida atidarant faila!" << endl;
+        }
+        fileRead.close();
+    } catch (const invalid_argument& e) {
+        cout << e.what() << endl;
+    }
 }
+
 
 void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, const string& FailoPav) {
     auto startIsvedimas = high_resolution_clock::now();
@@ -188,28 +220,42 @@ void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, const string&
     if (outFile.is_open()) {
         const int vardasWidth = 30;
         const int pavardeWidth = 30;
-        const int galutinisWidth = 25;
+        const int nd_pazymysWidth = 8; // Adjust the width as needed
+        const int egzasWidth = 8; // Width for the "Egz." column
 
-        outFile << left << setw(vardasWidth) << "Vardas" <<  setw(pavardeWidth) << "Pavarde" ;
-        outFile << setw(galutinisWidth) << "Galutinis (Vid)" <<endl;
+        outFile << left << setw(vardasWidth) << "Vardas" << setw(pavardeWidth) << "Pavarde";
+        for (int i = 1; i <= 5; ++i) {
+            outFile << "ND" << i << setw(nd_pazymysWidth);
+        }
+        outFile << "Egz." << endl;
 
         for (const Studentas& studentas : studentai) {
-            outFile << left << setw(vardasWidth) << studentas.Vardas <<  setw(pavardeWidth) << studentas.Pavarde ;
-            outFile << setw(galutinisWidth) << std::fixed << setprecision(2) << studentas.GalutinisB << endl;
+            outFile << left << setw(vardasWidth) << studentas.Vardas << setw(pavardeWidth) << studentas.Pavarde;
+
+            // Print up to 5 ND grades
+            for (int i = 0; i < 5; i++) {
+                if (i < studentas.ND.size()) {
+                    outFile << setw(nd_pazymysWidth) << fixed << setprecision(2) << studentas.ND[i];
+                } else {
+                    outFile << setw(nd_pazymysWidth) << " ";
+                }
+            }
+
+            outFile << setw(egzasWidth) << fixed << setprecision(2) << studentas.Egzas << endl;
         }
 
-        outFile.close(); // Close the file
-        cout << "Duomenys isvesti i faila: " << FailoPav << endl;
+        outFile << endl;
 
-
+        outFile.close();
     } else {
-        cout << "Neisejo atidaryti failo: " << FailoPav << endl;
+        cout << "Nepavyko atidaryti failo: " << FailoPav << endl;
     }
     auto stopIsvedimas = high_resolution_clock::now();
-    auto ISvedimoLaikas =duration_cast<std::chrono::milliseconds>(stopIsvedimas - startIsvedimas).count() / 1000.0;
-    cout << "Isvedimas uztruko"  << ISvedimoLaikas << " s" << endl;
+    auto ISvedimoLaikas = duration_cast<std::chrono::milliseconds>(stopIsvedimas - startIsvedimas).count() / 1000.0;
+    cout << "Isvedimas uztruko " << ISvedimoLaikas << " s" << endl;
     cout << endl;
 }
+
 
 void IsvestiDuomenis(const vector<Studentas>& studentai, const string& FailoPav) {
     ofstream outFile(FailoPav);
@@ -242,8 +288,6 @@ void MatuotiLaika(high_resolution_clock::time_point start, high_resolution_clock
 }
 
 void Generavimas(vector<Studentas>& studentai) {
-
-    Studentas studentas;
     const vector<int> studentCounts = {1000, 10000, 100000/*, 1000000, 10000000*/};
 
     for (int StudKiekis : studentCounts) {
@@ -254,13 +298,13 @@ void Generavimas(vector<Studentas>& studentai) {
             studentas.Vardas = "Vardas" + to_string(i);
             studentas.Pavarde = "Pavarde" + to_string(i);
 
-    for (int j = 1; j <= 5; ++j) {
-            int nd_pazymys = rand() % 10 + 1;
-            studentas.ND.push_back(nd_pazymys);
-        }
-        studentas.Egzas = rand() % 11;
-        studentas.GalutinisB = GalutinisBalas(studentas);
-        studentai.push_back(studentas);  // kiekvienas sugeneruotas studentas perduodamas vektoriui studentai, kur sis vektorius yra oerduodamas kaip funkcijos parametras
+            for (int j = 1; j <= 5; ++j) {
+                int nd_pazymys = rand() % 10 + 1;
+                studentas.ND.push_back(nd_pazymys);
+            }
+            studentas.Egzas = rand() % 11;
+
+            studentai.push_back(studentas);  // Save the student data in the vector
         }
 
         string FailoPav = to_string(StudKiekis) + ".txt";
