@@ -257,27 +257,27 @@ void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiuk
 
 
        void IsvestiDuomenis(const vector<Studentas>& studentai, const string& failoPavadinimas) {
-    ofstream outFile(failoPavadinimas + ".txt");
+ofstream outFile(failoPavadinimas);
 
-    if (!studentai.empty()) {
-        // Output column headers
-        outFile << left << setw(30) << "Vardas" << setw(30) << "Pavarde" << setw(15) << "Galutinis (Vid)" << endl;
+    if (outFile.is_open()) {
+        const int vardasWidth = 30;
+        const int pavardeWidth = 30;
+        const int galutinisWidth = 20;
+
+        outFile << left << setw(vardasWidth) << "Vardas" <<  setw(pavardeWidth) << "Pavarde" ;
+        outFile << setw(galutinisWidth) << "Galutinis (Vid)" <<endl;
 
         for (const Studentas& studentas : studentai) {
-            // Check if the line starts with "Vardas" and skip it
-            if (studentas.Vardas.find("Vardas") != string::npos) {
-                continue;
-            }
-
-            // Output student data
-            outFile << left << setw(30) << studentas.Vardas << setw(30) << studentas.Pavarde << setw(15) << studentas.GalutinisB << endl;
+            outFile << left << setw(vardasWidth) << studentas.Vardas <<  setw(pavardeWidth) << studentas.Pavarde ;
+            outFile << setw(galutinisWidth) << fixed << setprecision(2) << studentas.GalutinisB << endl;
         }
-    } else {
-        cout << "vektorius tuscias, nieko neisvedama." << endl;
-    }
 
-    outFile.close();
+        outFile.close();
+    } else {
+        cout << "Nepavyko atidaryti failo:  " << failoPavadinimas << endl;
+    }
 }
+
 
 
         void MatuotiLaika(high_resolution_clock::time_point start, high_resolution_clock::time_point stop, const char* veiksmas) {
