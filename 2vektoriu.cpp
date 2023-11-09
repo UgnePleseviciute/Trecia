@@ -1,6 +1,6 @@
-
-        #include "Stu.h"
-        #include "Faprasai.h"
+#include <algorithm>
+#include "Stu.h"
+#include "Faprasai.h"
 
         void Antraa(vector<Studentas>& studentai) {
             double suma = 0.0;  // Kintamasis laiko sumai
@@ -137,15 +137,17 @@
         }
 
 
-        void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai) {
-            for (vector<Studentas>::iterator it = studentai.begin(); it != studentai.end();) {
-                vector<Studentas>::iterator current = it++;
-                if (current->GalutinisB < 5.0 && current->GalutinisB > 0.0) {
-                    vargsiukai.push_back(*current);
-                    studentai.erase(current);
-                }
-            }
-        }
+
+void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai) {
+    auto partitionIt = std::remove_if(studentai.begin(), studentai.end(),
+        [](const Studentas& student) {
+            return student.GalutinisB >= 0.0 && student.GalutinisB < 5.0;
+        });
+
+    vargsiukai.insert(vargsiukai.end(), partitionIt, studentai.end());
+    studentai.erase(partitionIt, studentai.end());
+}
+
 
 
         void NuskaitytiVisusFailus(vector<Studentas>& studentai) {
@@ -254,27 +256,29 @@
         }
 
 
-        void IsvestiDuomenis(const vector<Studentas>& studentai, const string& FailoPav) {
-            ofstream outFile(FailoPav);
+       void IsvestiDuomenis(const vector<Studentas>& studentai, const string& failoPavadinimas) {
+    ofstream outFile(failoPavadinimas + ".txt");
 
-            if (outFile.is_open()) {
-                const int vardasWidth = 30;
-                const int pavardeWidth = 30;
-                const int galutinisWidth = 20;
+    if (!studentai.empty()) {
+        // Output column headers
+        outFile << left << setw(30) << "Vardas" << setw(30) << "Pavarde" << setw(15) << "Galutinis (Vid)" << endl;
 
-                outFile << left << setw(vardasWidth) << "Vardas" <<  setw(pavardeWidth) << "Pavarde" ;
-                outFile << setw(galutinisWidth) << "Galutinis (Vid)" <<endl;
-
-                for (const Studentas& studentas : studentai) {
-                    outFile << left << setw(vardasWidth) << studentas.Vardas <<  setw(pavardeWidth) << studentas.Pavarde ;
-                    outFile << setw(galutinisWidth) << fixed << setprecision(2) << studentas.GalutinisB << endl;
-                }
-
-                outFile.close();
-            } else {
-                cout << "Nepavyko atidaryti failo:  " << FailoPav << endl;
+        for (const Studentas& studentas : studentai) {
+            // Check if the line starts with "Vardas" and skip it
+            if (studentas.Vardas.find("Vardas") != string::npos) {
+                continue;
             }
+
+            // Output student data
+            outFile << left << setw(30) << studentas.Vardas << setw(30) << studentas.Pavarde << setw(15) << studentas.GalutinisB << endl;
         }
+    } else {
+        cout << "vektorius tuscias, nieko neisvedama." << endl;
+    }
+
+    outFile.close();
+}
+
 
         void MatuotiLaika(high_resolution_clock::time_point start, high_resolution_clock::time_point stop, const char* veiksmas) {
 
