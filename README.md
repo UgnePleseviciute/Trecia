@@ -43,53 +43,7 @@ Naudojant vektorius:
 
 Pagal pateiktas nuotraukas galime pastbėti, kad testavimo laikai skirasi labai ne daug
 
-4. Siekiant patikrinti ką naudojant rezultatai yra patikrinami išskirtomi greičiausiai buvo atliktas tyrimas aparašant kodus kiekvienai strategijai patikrinti ir gauti rezultatai patikrinti. NAudotojui pasirnkusi 3 varainta ( 3 - Studentu sarasas bus sugeneruotas automatiskai ir parodyti laikai kiek uztruko) suteikiamas pasirinkimas (Ar norite sugeneruoti duomenis naudojant  listus? [T/N]: Jei N - tai generuosime duomenis naudojant vektorius) pagal šiuos pasirinkimus yra paleidžiama programa.
-   4.1 (1 strategija): Bendro studentai konteinerio (vector ir list tipų) skaidymas (rūšiavimas) į du naujus to paties tipo konteinerius: "vargšiukų" ir "kietiakų". Tokiu būdu tas pats studentas yra dvejuose konteineriuose: bendrame studentai ir viename iš suskaidytų (vargšiukai arba kietiakai).
-   ❍ Žemiau pateikiami laikai naudojant pirmą strategija su listu konteineriais
-   ![image](https://github.com/UgnePleseviciute/PirmaVersija/assets/145859423/13b4f8cc-3414-49c1-b8af-c6ecd93db0b9)
-   
-   ❍ Žemiau pateikiami laikų rezultatai naudojant vektorius kaip konteinerius
-   ![image](https://github.com/UgnePleseviciute/PirmaVersija/assets/145859423/bf30e6a5-c491-49e2-a65b-536ded6320fc)
 
-   Galime pastebėti, kad laikai skiriasi tačiau ne daug
-
-   4.2 (2 strategija) : Bendro studentų konteinerio (vector ir list) skaidymas (rūšiavimas) panaudojant tik vieną naują konteinerį: "vargšiukai". Tokiu būdu, jei studentas yra vargšiukas, jį turime įkelti į naująjį "vargšiukų" konteinerį ir ištrinti iš bendro studentai konteinerio. Po šio žingsnio studentai konteineryje liks vien tik kietiakai.
-
-   ❍ Žemiau pateikiami laikai naudojant antrą strategija su listu konteineriais
-   ![image](https://github.com/UgnePleseviciute/PirmaVersija/assets/145859423/ce6e41c9-8aad-452b-bb58-1cdf8bf54155)
-
-   ❍ Tačiau siekiant išmatuoti laikus naudojant vektorius kaip konteinerius ir antrą strategiją buvo susidurta su bėda, kur kai duomenys siekia >=1000000 programa labai sulet4davo ir laikų trukmės nebepateikdavo
-   ![image](https://github.com/UgnePleseviciute/PirmaVersija/assets/145859423/24c3236a-495a-4dbf-9416-490f1bef6d5f)
-
-   Taigi galima daryti išvadą, kad šia strategija apsimoka naudoti jei turime listus kaip konteinerius
-
-   4.3  (3 strategija): Bendro studentų konteinerio (vector ir list) skaidymas (rūšiavimas) panaudojant greičiausiai veikianti 1 arba 2 strategiją  įtraukiant į ją "efektyvius" darbo su konteineriais metodus (pateikiami žemiau).
-
-  Metodai:
-   std::find
-   std::find_if
-   std::search
-   std::copy
-   std::remove
-   std::remove_if
-   std::remove_copy
-   std::remove_copy_if
-   std::transform
-   std::partition
-   std::stable_partition
-     4.3.1 Siekiant palygitinti ir surasti greičiausiai veikianti metodą buvo pasirinkita 3 skirtingi metodai (    std::find_if,    std::remove_if,    std::partition)
-
-   ❍ Žemiau pateikiami laikų rezuktatai naudojant vektorius kaip konteinerius ir pasirinkus  std::partition metodą. 
-   ![image](https://github.com/UgnePleseviciute/PirmaVersija/assets/145859423/4f38606d-1c2b-499d-bc3c-d11cec3112cb)
-
-   ❍ Žemiau pateikiami laikų rezuktatai naudojant vektorius kaip konteinerius ir pasirinkus std::remove_if metodą. 
-   ![image](https://github.com/UgnePleseviciute/PirmaVersija/assets/145859423/cfc75e40-9937-49a4-9b2c-1b1b15515805)
-
-   ❍ Žemiau pateikiami laikų rezuktatai naudojant vektorius kaip konteinerius ir pasirinkus std::find_if metodą. 
-   ![image](https://github.com/UgnePleseviciute/PirmaVersija/assets/145859423/3d50a443-a6f7-4ded-8aa6-932bb895f42c)
-
-
-  Iš šių duomenų galime pastebėti, kad naudojant std::partition duomenys yra išskirtomi greičiausiai   
 
 
 
