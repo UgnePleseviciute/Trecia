@@ -139,13 +139,13 @@
 
 
 void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai) {
-    auto removeIt = std::remove_if(studentai.begin(), studentai.end(),
+    auto partitionIt = std::remove_if(studentai.begin(), studentai.end(),
         [](const Studentas& student) {
             return student.GalutinisB >= 0.0 && student.GalutinisB < 5.0;
         });
 
-    vargsiukai.insert(vargsiukai.end(), removeIt, studentai.end());
-    studentai.erase(removeIt, studentai.end());
+    vargsiukai.insert(vargsiukai.end(), partitionIt, studentai.end());
+    studentai.erase(partitionIt, studentai.end());
 }
 
 
