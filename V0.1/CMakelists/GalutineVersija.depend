@@ -1,0 +1,45 @@
+# depslib dependency file v1.0
+1699705424 source:c:\users\lenovo\desktop\c++\galutineversija\funkcijos.cpp
+	"Stu.h"
+	"FunkcijuAprasai.h"
+
+1699705424 c:\users\lenovo\desktop\c++\galutineversija\stu.h
+	<string>
+	<vector>
+	<iostream>
+	<iomanip>
+	<algorithm>
+	<random>
+	<ctime>
+	<sstream>
+	<stdlib.h>
+	<fstream>
+	<iterator>
+	<stdexcept>
+	<sstream>
+	<string>
+	<stdexcept>
+	<chrono>
+	<cstdlib>
+	<list>
+
+1699715111 c:\users\lenovo\desktop\c++\galutineversija\funkcijuaprasai.h
+	"stu.h"
+
+1699816392 source:c:\users\lenovo\desktop\c++\galutineversija\listu.cpp
+	"Stu.h"
+	"FunkcijuAprasai.h"
+
+1699705424 source:c:\users\lenovo\desktop\c++\galutineversija\main.cpp
+	"Stu.h"
+	"FunkcijuAprasai.h"
+
+1699705424 source:c:\users\lenovo\desktop\c++\galutineversija\reading.cpp
+	"stu.h"
+	"FunkcijuAprasai.h"
+
+1699816413 source:c:\users\lenovo\desktop\c++\galutineversija\vektoriu.cpp
+	<algorithm>
+	"Stu.h"
+	"FunkcijuAprasai.h"
+
