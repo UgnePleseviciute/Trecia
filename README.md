@@ -66,3 +66,6 @@ Pagal pateiktas nuotraukas galime pastbėti, kad testavimo laikai skirasi labai 
 
 
   Iš šių duomenų galime pastebėti, kad naudojant std::partition duomenys yra išskirtomi greičiausiai   
+
+  Paleidimo instrukcjs: 
+  Faile V0.1 yra aplankalas "Paleidimui" jį atsidarius yra .exe failas ant jo paspaudus pasileidžia kodas. 
