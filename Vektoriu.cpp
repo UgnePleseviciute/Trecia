@@ -3,7 +3,7 @@
 #include "FunkcijuAprasai.h"
 
 void Antraa(vector<Studentas>& studentai) {
-    const vector<int> studentCounts = {1000, 10000, 100000, 1000000, 10000000};
+    const vector<int> studentCounts = {1000, 10000, 100000, 1000000/*, 10000000*/};
     string FailoPav;
     int Pasirinkimas, Tvarka;
 
@@ -50,7 +50,7 @@ void Antraa(vector<Studentas>& studentai) {
         for (int i = 0; i < 3; ++i) {
             auto startNuskaitymas = high_resolution_clock::now();
             FailoPav = to_string(StudKiekis) + ".txt";
-            NuskaitytiDuomenis(FailoPav, studentai);
+            Studentas::NuskaitytiDuomenis(FailoPav, studentai);
             auto stopNuskaitymas = high_resolution_clock::now();
             auto nuskaitymoLaikas = duration_cast<milliseconds>(stopNuskaitymas - startNuskaitymas).count() / 1000.0;
             matavimoLaikaiNuskaitymas[i] = nuskaitymoLaikas;
@@ -68,7 +68,7 @@ void Antraa(vector<Studentas>& studentai) {
             matavimoLaikaiIsrusiavimui[i] = IsrusiavimoLaikas;
 
             auto startRikiavimas = high_resolution_clock::now();
-            RikiuotiStudentus(studentai, vargsiukai);
+            Studentas::RikiuotiStudentus(studentai, vargsiukai);
             auto stopRikiavimas = high_resolution_clock::now();
             auto rikiavimoLaikas = duration_cast<milliseconds>(stopRikiavimas - startRikiavimas).count() / 1000.0;
             matavimoLaikaiRikiavimas[i] = rikiavimoLaikas;
@@ -102,12 +102,12 @@ void Antraa(vector<Studentas>& studentai) {
         cout << endl;
         studentai.clear(); //isvalom vektoriu
     }
-
-    PasirinktiVeiksma(studentai);
+    Studentas studentas;
+    studentas.PasirinktiVeiksma(studentai);
 }
 
 
-void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai) {
+void Studentas::RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai) {
     auto partitionIt = std::partition(studentai.begin(), studentai.end(),
         [](const Studentas& student) {
             return student.CalculateGalutinisB() > 5.0;
@@ -120,16 +120,16 @@ void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiuk
 
 
 
-        void NuskaitytiVisusFailus(vector<Studentas>& studentai) {
+void NuskaitytiVisusFailus(vector<Studentas>& studentai) {
     const vector<int> studentCounts = {1000, 10000, 100000, 1000000, 10000000};
 
     for (int StudKiekis : studentCounts) {
         string FailoPav = to_string(StudKiekis) + ".txt";
-        NuskaitytiDuomenis(FailoPav, studentai);
+        Studentas::NuskaitytiDuomenis(FailoPav, studentai);
     }
 }
 
-void NuskaitytiDuomenis(const string& FailoPav, vector<Studentas>& studentai) {
+void Studentas::NuskaitytiDuomenis(const string& FailoPav, vector<Studentas>& studentai) {
     int temp;
     ifstream fileRead;
     string buff;
@@ -219,7 +219,7 @@ void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, const string&
 }
 
 
-    void IsvestiDuomenis(const vector<Studentas>& studentai, const string& failoPavadinimas) {
+void IsvestiDuomenis(const vector<Studentas>& studentai, const string& failoPavadinimas) {
     ofstream outFile(failoPavadinimas);
 
     if (outFile.is_open()) {
@@ -321,14 +321,15 @@ void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, const string&
 
     if (Listu == 'T' || Listu == 't')
     {
-        std::list<Studentas> studentu; // Sukurti sąrašą studentams
-        Laikai(studentu); // Iškviesti funkciją su sąrašu
+     /*   std::list<Studentas> studentu; // Sukurti sąrašą studentams
+        Laikai(studentu); // Iškviesti funkciją su sąrašu*/
     }
     else if (Listu == 'N' || Listu == 'n')
    {
         Antraa(studentai);
     }
     else {
-        PasirinktiVeiksma(studentai);
+            Studentas studentas;
+        studentas.PasirinktiVeiksma(studentai);
     }
 }

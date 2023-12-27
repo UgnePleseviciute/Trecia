@@ -72,6 +72,7 @@ private:
     int Egzas;
     double GalutinisB;
     char SkaiciavimoBudas;
+    friend double GalutinisBalas(const Studentas& studentas);
 
 public:
     // Default constructor with default parameter values
@@ -92,18 +93,19 @@ public:
      { return SkaiciavimoBudas; }
 
     // Setter functions
-    void setVardas(const std::string& vardas)
-        { Vardas = vardas; }
-    void setPavarde(const std::string& pavarde)
-        { Pavarde = pavarde; }
-    void setND(const std::vector<int>& nd)
-        { ND = nd; }
-    void setEgzas(int egzas)
-        { Egzas = egzas; }
-    void setGalutinisB(double galutinisB)
-        { GalutinisB = galutinisB; }
-    void setSkaiciavimoBudas(char skaiciavimoBudas)
-        { SkaiciavimoBudas = skaiciavimoBudas; }
+    void setVardas(const std::string& newVardas);
+
+    void setPavarde(const std::string& newPavarde);
+
+    void setND(const std::vector<int>& newND);
+
+    void setEgzas(int newegzas);
+
+    void setGalutinisB(double newGalutinisB);
+
+   void setSkaiciavimoBudas(char newSkaiciavimoBudas);
+
+
 
 
     double CalculateGalutinisB() const { \
@@ -122,7 +124,17 @@ public:
     void inputFromStream(std::istream& is) {}
     void outputToStream(std::ostream& os, bool isHeader = false) const {}
 
-};
+ ~Studentas() {
+
+    ND.clear(); } //destruktorius
+
+  static void read_from_file(std::vector<Studentas>& mok, int* pazymiu_sk);
+  static void NuskaitytiDuomenis(const string& FailoPav, vector<Studentas>& studentai);
+  static void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai);
+    void PasirinktiVeiksma(vector<Studentas>& studentai);
+    static void StudentoDuomenys(Studentas& studentas);
+
+ };
 
 
 

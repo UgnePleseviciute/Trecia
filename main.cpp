@@ -6,7 +6,8 @@
 int main() {
 
     vector  <Studentas> studentai;
-    PasirinktiVeiksma(studentai);
+    Studentas studentas;
+    studentas.PasirinktiVeiksma(studentai);
 
     return 0;
 }

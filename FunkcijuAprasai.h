@@ -4,14 +4,13 @@
 
 #include "stu.h"
 
-double GalutinisBalas(const Studentas& studentas);
+//double GalutinisBalas(const Studentas& studentas);
 void Isvedimas(const Studentas& studentas, bool isHeader);
-void StudentoDuomenys(Studentas& studentas);
-void read_from_file(vector<Studentas>& Eil, int* pazymiu_sk);
+//void StudentoDuomenys(Studentas& studentas);
 void IsvedimasLenteles(const vector<Studentas>& studentai);
 bool CompareByVardas(const Studentas& a, const Studentas& b);
 bool TikrintiFailoTurini(const string& failoPavadinimas);
-void PasirinktiVeiksma(vector<Studentas>& studentai);
+//void PasirinktiVeiksma(vector<Studentas>& studentai);
 
 bool CompareByPavarde(const Studentas& a, const Studentas& b);
 bool CompareByPavarde1(const Studentas& a, const Studentas& b);
@@ -24,10 +23,7 @@ void MatuotiLaika(high_resolution_clock::time_point start, high_resolution_clock
 void Generavimas(vector<Studentas>& studentai);
 void GenerateStudentData(vector <Studentas>& studentai);
 void Antraa(vector<Studentas>& studentai);
-void NuskaitytiDuomenis(const string& FailoPav, vector<Studentas>& studentai);
 void NuskaitytiVisusFailus(std::vector<Studentas>& studentai);
-//void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai, vector<Studentas>& kietiakiai);
-void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai);
 
 void IsvestiDuomenisIpagrFaila(const vector<Studentas>& studentai, const string& FailoPav);
 void IsvestiDuomenis(const vector<Studentas>& studentai, const string& FailoPav);
@@ -50,7 +46,6 @@ double CalculateGalutinisBlISTO(const Studentas& studentas);
 
 
 //void NuskaitytiVisusFailusListo(list<Studentas>& studentu);
-
 
 
 #endif // FUNKCIJUAPRASAI_H_INCLUDED
