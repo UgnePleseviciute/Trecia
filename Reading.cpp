@@ -10,8 +10,8 @@ unsigned int countWordsInString(const std::string& str) {
     std::stringstream stream(str);
     return std::distance(std::istream_iterator<std::string>(stream), std::istream_iterator<std::string>());
 }
-
-void read_from_file(std::vector<Studentas>& mok, int* pazymiu_sk) {
+/*
+void  Studentas::read_from_file(std::vector<Studentas>& mok, int* pazymiu_sk) {
     int student_counter = 0;
     int temp;
     std::ifstream fileRead;
@@ -95,7 +95,7 @@ void IsvedimasLenteles(const std::vector<Studentas>& studentai) {
 
         std::cout << std::setw(12) << std::left << student.getVardas() << " | " << std::setw(12) << student.getPavarde() << " | " << std::setw(18) << std::fixed << std::setprecision(2) << galutinis_vid << " | " << std::setw(18) << std::fixed << std::setprecision(2) << galutinis_med << std::endl;
     }
-}
+}*/
 
 bool CompareByVardas(const Studentas& a, const Studentas& b) {
     return a.getVardas() < b.getVardas();
