@@ -1,5 +1,6 @@
 #include "stu.h"
 #include "funkcijuAprasai.h"
+#include "zmogus.h"
 
 
 void  Studentas::read_from_file(std::vector<Studentas>& studentai, string failopav) {

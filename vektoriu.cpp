@@ -1,6 +1,8 @@
 #include <algorithm>
 #include "Stu.h"
 #include "funkcijuAprasai.h"
+#include "zmogus.h"
+
 
 void Antraa(vector<Studentas>& studentai) {
     const vector<int> studentCounts = {1000, 10000, 100000, 1000000/*, 10000000*/};

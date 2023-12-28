@@ -1,9 +1,11 @@
 #include "Stu.h"
 #include "funkcijuAprasai.h"
+#include "zmogus.h"
+
 
 void Studentas::PasirinktiVeiksma(vector<Studentas>& studentai) {
     char pasirinkimas;
-    cout << "Pasirinkite kaip vesime duomenis ( 2 - duomenis reiks ivesti ranka,3 - Studentu sarasas bus sugeneruotas automatiskai ir parodyti laikai kiek uztruko, 4 - Demonstravimas Rule of three,  5 -Baigti programa: ";
+    cout << "Pasirinkite kaip vesime duomenis ( 2 - duomenis reiks ivesti ranka,3 - Studentu sarasas bus sugeneruotas automatiskai ir parodyti laikai kiek uztruko, 4 - Demonstravimas Rule of three,  5 - Neveikia zmogus zmogus, 6 -aigti programa: ";
     cin >> pasirinkimas;
     cout << endl;
 
@@ -60,8 +62,27 @@ void Studentas::PasirinktiVeiksma(vector<Studentas>& studentai) {
         cout << studentas.getVardas() << " " << studentas.getPavarde() << endl;
     }
 
+    Studentas studentas1;
+    cin >> studentas1;
+    Studentas studentas2(studentas1);
+    Studentas studentas3=studentas1;
+    cout << studentas1 << endl;
+    cout << studentas2 << endl;
+    cout << studentas3 << endl;
+
+
     } else if (pasirinkimas == '5') {
+
+       cout << "Klasiu demonstravimas:" << endl;
+
+        /*Zmogus zmogus;
+        Studentas studentas1;
+        cin >> studentas1;*/
+
+    }else if (pasirinkimas == '6')
+    {
         exit(0);
+
     }
 }
 

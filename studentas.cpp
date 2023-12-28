@@ -1,5 +1,6 @@
 #include "stu.h"
 #include "funkcijuAprasai.h"
+#include "zmogus.h"
 
 
 void Studentas::setVardas(const std::string& newVardas) {

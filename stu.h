@@ -17,6 +17,9 @@
 #include <cstdlib>
 #include <list>
 
+
+#include "Zmogus.h"
+
 using std::cout;
 using std::endl;
 using std::cin;
@@ -46,18 +49,16 @@ using namespace std::chrono;
 using std::list;
 
 
-class Studentas {
+class Studentas : public Zmogus{
 private:
-    std::string Vardas;
-    std::string Pavarde;
+
     std::vector<int> ND;
     int Egzas;
     double GalutinisB;
     char SkaiciavimoBudas;
-    friend double GalutinisBalas(const Studentas& studentas);
 
 public:
-    Studentas() : Egzas(0), GalutinisB(0), SkaiciavimoBudas(' ') {}
+    Studentas() : Zmogus(), Egzas(0), GalutinisB(0), SkaiciavimoBudas(' ') {}
 
     // Getter
     std::string getVardas() const
@@ -96,8 +97,7 @@ public:
 
     //Kopijavimo konstruktorius
     Studentas(const Studentas& other)
-        : Vardas(other.Vardas),
-          Pavarde(other.Pavarde),
+        : Zmogus(other),
           ND(other.ND),
           Egzas(other.Egzas),
           GalutinisB(other.GalutinisB),
@@ -106,8 +106,7 @@ public:
 
     Studentas& operator=(const Studentas& other) { //priskyrimo
         if (this != &other) {
-            Vardas = other.Vardas;
-            Pavarde = other.Pavarde;
+            Zmogus::operator=(other);
             ND = other.ND;
             Egzas = other.Egzas;
             GalutinisB = other.GalutinisB;
@@ -125,6 +124,9 @@ static double vidurkis(const vector<int>& pazymiai) {
         return pazymiai.size() > 0 ? paz_suma / pazymiai.size() : 0;
     }
 
+    void dosmth() const override
+    { cout<< Vardas << " " << Pavarde << " daro " <<endl;}
+
     double CalculateGalutinisB() const;
     static void read_from_file(std::vector<Studentas>& studentai, string failopav);
     static void NuskaitytiDuomenis(const string& FailoPav, vector<Studentas>& studentai);
@@ -134,6 +136,8 @@ static double vidurkis(const vector<int>& pazymiai) {
 
     friend std::istream& operator>>(std::istream& is, Studentas& studentas);
     friend std::ostream& operator<<(std::ostream& os, const Studentas& studentas);
+    friend double GalutinisBalas(const Studentas& studentas);
+
  };
 
 

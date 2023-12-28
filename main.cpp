@@ -1,9 +1,10 @@
 #include "Stu.h"
 #include "funkcijuAprasai.h"
 
-
+#include "zmogus.h"
 
 int main() {
+
 
     vector  <Studentas> studentai;
     Studentas studentas;
@@ -11,4 +12,3 @@ int main() {
 
     return 0;
 }
-
