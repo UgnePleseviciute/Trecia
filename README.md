@@ -9,3 +9,6 @@
  2.2.3 Paspaudus ( 3 ) Naudojotui suteikia galimybė automatiškai sugeneruoti studentų sarašus su nd pažymiais, egzamino balu. Šie duomenys yra išvedami į failus. Taip pat ( 3 ) punkte atliekama failų nuskaitymas ir iššskirtymas į dar kelis atskirus failus pagal galutinius balus. 
  2.2.4 Paspaudus ( 4 ) yra pavaizduojams Rule of three veikimas. 
  
+2.3 v1.5 realizuota abstrakti klasė Zmogus, bandant kurti jos objektą, gauname klaidą: cannot declare variable 'zmogus' to be of abstract type 'Zmogus'|
+
+ ![image](https://github.com/UgnePleseviciute/AntraNaujaiNaujai/assets/145859423/2b5c49a0-6593-4c50-86c6-24edb63790eb)
