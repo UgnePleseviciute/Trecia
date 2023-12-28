@@ -1,5 +1,5 @@
 #include "Stu.h"
-#include "FunkcijuAprasai.h"
+#include "funkcijuAprasai.h"
 
 
 

@@ -13,19 +13,14 @@
 #include <fstream>
 #include <iterator>
 #include <stdexcept>
-#include <sstream>
-#include <string>
-#include <stdexcept>
 #include <chrono>
 #include <cstdlib>
 #include <list>
-
 
 using std::cout;
 using std::endl;
 using std::cin;
 using std::string;
-using std::vector;
 using std::left;
 using std::right;
 using std::setw;
@@ -44,25 +39,12 @@ using std::cerr;
 using std::ios;
 using std::streamsize;
 using std::numeric_limits;
-//antrai
 using std::srand;
 using std::random_shuffle;
 using std::ofstream;
 using namespace std::chrono;
 using std::list;
-#include <string>
-#include <vector>
 
-
-#include <iostream>
-#include <vector>
-#include <algorithm>
-
-#include <iostream>
-#include <vector>
-
-#include <iostream>
-#include <vector>
 
 class Studentas {
 private:
@@ -75,10 +57,9 @@ private:
     friend double GalutinisBalas(const Studentas& studentas);
 
 public:
-    // Default constructor with default parameter values
     Studentas() : Egzas(0), GalutinisB(0), SkaiciavimoBudas(' ') {}
 
-    // Getter functions
+    // Getter
     std::string getVardas() const
      { return Vardas; }
     std::string getPavarde() const
@@ -92,7 +73,7 @@ public:
     char getSkaiciavimoBudas() const
      { return SkaiciavimoBudas; }
 
-    // Setter functions
+    // Setter
     void setVardas(const std::string& newVardas);
 
     void setPavarde(const std::string& newPavarde);
@@ -106,17 +87,6 @@ public:
    void setSkaiciavimoBudas(char newSkaiciavimoBudas);
 
 
-
-
-    double CalculateGalutinisB() const { \
-        int totalHomework = 0;
-        for (int nd : ND) {
-            totalHomework += nd;
-        }
-
-        return 0.4 * static_cast<double>(totalHomework) / ND.size() + 0.6 * Egzas;
-    }
-
      void addND(int value) {
         ND.push_back(value);
     }
@@ -124,16 +94,46 @@ public:
     void inputFromStream(std::istream& is) {}
     void outputToStream(std::ostream& os, bool isHeader = false) const {}
 
- ~Studentas() {
+    //Kopijavimo konstruktorius
+    Studentas(const Studentas& other)
+        : Vardas(other.Vardas),
+          Pavarde(other.Pavarde),
+          ND(other.ND),
+          Egzas(other.Egzas),
+          GalutinisB(other.GalutinisB),
+          SkaiciavimoBudas(other.SkaiciavimoBudas) {}
 
-    ND.clear(); } //destruktorius
 
-  static void read_from_file(std::vector<Studentas>& mok, int* pazymiu_sk);
-  static void NuskaitytiDuomenis(const string& FailoPav, vector<Studentas>& studentai);
-  static void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai);
+    Studentas& operator=(const Studentas& other) { //priskyrimo
+        if (this != &other) {
+            Vardas = other.Vardas;
+            Pavarde = other.Pavarde;
+            ND = other.ND;
+            Egzas = other.Egzas;
+            GalutinisB = other.GalutinisB;
+            SkaiciavimoBudas = other.SkaiciavimoBudas;
+        }
+        return *this;
+    }
+
+    ~Studentas()  //destruktorius
+    { ND.clear(); }
+
+
+static double vidurkis(const vector<int>& pazymiai) {
+        double paz_suma = accumulate(pazymiai.begin(), pazymiai.end(), 0.0);
+        return pazymiai.size() > 0 ? paz_suma / pazymiai.size() : 0;
+    }
+
+    double CalculateGalutinisB() const;
+    static void read_from_file(std::vector<Studentas>& studentai, string failopav);
+    static void NuskaitytiDuomenis(const string& FailoPav, vector<Studentas>& studentai);
+    static void RikiuotiStudentus(vector<Studentas>& studentai, vector<Studentas>& vargsiukai);
     void PasirinktiVeiksma(vector<Studentas>& studentai);
     static void StudentoDuomenys(Studentas& studentas);
 
+    friend std::istream& operator>>(std::istream& is, Studentas& studentas);
+    friend std::ostream& operator<<(std::ostream& os, const Studentas& studentas);
  };
 
 

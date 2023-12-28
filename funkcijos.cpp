@@ -1,34 +1,22 @@
 #include "Stu.h"
-#include "FunkcijuAprasai.h"
-
+#include "funkcijuAprasai.h"
 
 void Studentas::PasirinktiVeiksma(vector<Studentas>& studentai) {
-    int Pasirinkimas;
     char pasirinkimas;
-    cout << "Pasirinkite kaip vesime duomenis (1 - nuskaityta bus is failo, 2 - duomenis reiks ivesti ranka),3 - Studentu sarasas bus sugeneruotas automatiskai ir parodyti laikai kiek uztruko, 4 - Baigti programa: ";
+    cout << "Pasirinkite kaip vesime duomenis ( 2 - duomenis reiks ivesti ranka,3 - Studentu sarasas bus sugeneruotas automatiskai ir parodyti laikai kiek uztruko, 4 - Demonstravimas Rule of three,  5 -Baigti programa: ";
     cin >> pasirinkimas;
     cout << endl;
 
     if (pasirinkimas == '1') {
-        /*int pazymiu_sk;
-        vector<Studentas> mok;
-        Studentas::read_from_file(mok, &pazymiu_sk);
-        IsvedimasLenteles(mok);
-        sort(mok.begin(), mok.end(), CompareByVardas);*/
-    } else if (pasirinkimas == '2') {
-        char SkaiciavimoBudas;
-        cout << "Pasirinkite skaiciavimo metoda (V- Vidurkis, M - Mediana): ";
-        cin >> SkaiciavimoBudas;
+//----------------------------------------------
 
-        if (SkaiciavimoBudas != 'V' && SkaiciavimoBudas != 'v' && SkaiciavimoBudas != 'M' && SkaiciavimoBudas != 'm') {
-            cout << "Nesuprantama ivesti, naudosime Vidurki pagal Defaulta." << endl;
-            SkaiciavimoBudas = 'V';
-        }
+    } else if (pasirinkimas == '2') {
+            Studentas studentas;
+
         char PridetiDarViena;
         do {
-            Studentas studentas;
             studentas.inputFromStream(std::cin);
-            studentas.StudentoDuomenys(studentas);  // Call the member function on the instance
+            std::cin >> studentas;  // Čia iškviestas operatorius
             studentai.push_back(studentas);
 
             cout << "Ar norite prideti dar viena studenta? (T - Taip, N - Ne) ";
@@ -39,12 +27,40 @@ void Studentas::PasirinktiVeiksma(vector<Studentas>& studentai) {
         cout << "Studentu duomenys ir galutiniai balai:" << endl;
         bool isHeader = true;
         for (const Studentas& student : studentai) {
-            Isvedimas(student, isHeader);  // Use true for isHeader
+            std::cout << studentas;
             isHeader = false;
         }
     } else if (pasirinkimas == '3') {
         Pasirinkti();
-    } else if (pasirinkimas == '4') {
+   } else if (pasirinkimas == '4') {
+
+    vector<Studentas> studentuSarasas;
+
+    string failo_pav;
+    cout << "Iveskite failo pavadinima: ";
+    cin >> failo_pav;
+    Studentas::read_from_file(studentuSarasas, failo_pav);
+
+    vector<Studentas> nukopijuotas1(studentuSarasas);
+    vector<Studentas> nukopijuotas2;
+    nukopijuotas2 = studentuSarasas;
+
+    cout << "Originalus:\n";
+    for (const auto& studentas : studentuSarasas) {
+        cout << studentas.getVardas() << " " << studentas.getPavarde() << endl;
+    }
+
+    cout << "\nNukopijuotas 1:\n";
+    for (const auto& studentas : nukopijuotas1) {
+        cout << studentas.getVardas() << " " << studentas.getPavarde() << endl;
+    }
+
+    cout << "\nNukopijuotas 2:\n";
+    for (const auto& studentas : nukopijuotas2) {
+        cout << studentas.getVardas() << " " << studentas.getPavarde() << endl;
+    }
+
+    } else if (pasirinkimas == '5') {
         exit(0);
     }
 }
@@ -84,25 +100,32 @@ double GalutinisBalas(const Studentas& studentas) {
     }
 }
 
-void Isvedimas(const Studentas& studentas, bool isHeader) {
-            if (isHeader) {
-                int tableWidth = 72;
-                cout << string(tableWidth, '-') << endl;
-                cout << "| " << left << setw(20) << "Vardas" << " | " << setw(20) << "Pavarde" << " | ";
-                if (studentas.getSkaiciavimoBudas() == 'V' || studentas.getSkaiciavimoBudas() == 'v') {
-                    cout << setw(20) << "Galutinis (Vid)" << " |" << endl;
-                } else {
-                    cout << setw(20) << "Galutinis (Med)" << " |" << endl;
-                }
-                cout << string(tableWidth, '-') << endl;
-            }
 
-            cout << "| " << left << setw(20) << studentas.getVardas() << " | " << setw(20)
-                << studentas.getPavarde() << " | ";
+unsigned int countWordsInString(const std::string& str) {
+    std::stringstream stream(str);
+    return std::distance(std::istream_iterator<std::string>(stream), std::istream_iterator<std::string>());
+}
 
-            if (studentas.getSkaiciavimoBudas() == 'V' || studentas.getSkaiciavimoBudas() == 'v') {
-                cout << setw(20) << fixed << setprecision(2) << GalutinisBalas(studentas) << " |" << endl;
-            } else {
-                cout << setw(20) << fixed << setprecision(2) << GalutinisBalas(studentas) << " |" << endl;
-            }
-        }
+bool CompareByVardas(const Studentas& a, const Studentas& b) {
+    return a.getVardas() < b.getVardas();
+}
+
+bool CompareByVardas1(const Studentas& a, const Studentas& b) {
+    return a.getVardas() > b.getVardas();
+}
+
+bool CompareByPavarde(const Studentas& a, const Studentas& b) {
+    return a.getPavarde() < b.getPavarde();
+}
+
+bool CompareByPavarde1(const Studentas& a, const Studentas& b) {
+    return a.getPavarde() > b.getPavarde();
+}
+
+bool CompareByBalas(const Studentas& a, const Studentas& b) {
+    return a.getGalutinisB() < b.getGalutinisB();
+}
+
+bool CompareByBalas1(const Studentas& a, const Studentas& b) {
+    return a.getGalutinisB() > b.getGalutinisB();
+}
