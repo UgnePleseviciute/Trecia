@@ -28,7 +28,7 @@ void Studentas::PasirinktiVeiksma(vector<Studentas>& studentai) {
         do {
             Studentas studentas;
             studentas.inputFromStream(std::cin);
-            studentas.StudentoDuomenys(studentas);  
+            studentas.StudentoDuomenys(studentas);  // Call the member function on the instance
             studentai.push_back(studentas);
 
             cout << "Ar norite prideti dar viena studenta? (T - Taip, N - Ne) ";
@@ -39,7 +39,7 @@ void Studentas::PasirinktiVeiksma(vector<Studentas>& studentai) {
         cout << "Studentu duomenys ir galutiniai balai:" << endl;
         bool isHeader = true;
         for (const Studentas& student : studentai) {
-            Isvedimas(student, isHeader);  
+            Isvedimas(student, isHeader);  // Use true for isHeader
             isHeader = false;
         }
     } else if (pasirinkimas == '3') {

@@ -98,7 +98,7 @@ void Antraa(vector<Studentas>& studentai) {
         cout << "Vidutinis isrusiavimo laikas ("  << StudKiekis << " duomenu): " <<  vidutinisIsrusiavimas << " s" << endl;
         cout << "Vidutinis iskaidymo laikas (" << StudKiekis << " duomenu): " << vidutinisRikiavimas << " s" << endl;
         cout << "Vidutinis isvedimo laikas vargsiukams (" << StudKiekis << " duomenu): " << vidutinisIsvestisVargsiukai << " s" << endl;
-        cout << "Vidutinis isvedimo laikas mazintam (" << StudKiekis << " duomenu): " << vidutinisIsvestisKietiakiai << " s" << endl;
+        //cout << "Vidutinis isvedimo laikas mazintam (" << StudKiekis << " duomenu): " << vidutinisIsvestisKietiakiai << " s" << endl;
         cout << endl;
         studentai.clear(); //isvalom vektoriu
     }

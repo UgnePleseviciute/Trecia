@@ -75,9 +75,10 @@ private:
     friend double GalutinisBalas(const Studentas& studentas);
 
 public:
+    // Default constructor with default parameter values
     Studentas() : Egzas(0), GalutinisB(0), SkaiciavimoBudas(' ') {}
 
-    // Getter 
+    // Getter functions
     std::string getVardas() const
      { return Vardas; }
     std::string getPavarde() const
@@ -91,7 +92,7 @@ public:
     char getSkaiciavimoBudas() const
      { return SkaiciavimoBudas; }
 
-    // Setter 
+    // Setter functions
     void setVardas(const std::string& newVardas);
 
     void setPavarde(const std::string& newPavarde);
@@ -103,6 +104,9 @@ public:
     void setGalutinisB(double newGalutinisB);
 
    void setSkaiciavimoBudas(char newSkaiciavimoBudas);
+
+
+
 
     double CalculateGalutinisB() const { \
         int totalHomework = 0;

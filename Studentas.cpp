@@ -5,13 +5,16 @@ void Studentas::setVardas(const std::string& newVardas) {
     Vardas = newVardas;
 }
 void Studentas::setPavarde(const std::string& newPavarde) {
+    // Implementation of setPavarde
     Pavarde = newPavarde;
 }
 void Studentas::setND(const std::vector<int>& newND) {
+    // Implementation of setND
     ND = newND;
 }
 
 void Studentas::setEgzas(int newEgzas) {
+    // Implementation of setEgzas
     Egzas = newEgzas;
 }
 void Studentas::setGalutinisB(double newGalutinisB) {
