@@ -1,4 +1,4 @@
-    #include "Stu.h"
+  /*  #include "Stu.h"
     #include "FunkcijuAprasai.h"
 
     void Laikai(list<Studentas>& studentu) {
@@ -33,9 +33,9 @@
         Tvarkaa = 1;
     }
 
-    list<int> studentCounts = {1000, 10000, 100000, 1000000/*, 10000000*/};
+    list<int> studentCounts = {1000, 10000, 100000, 1000000/*, 10000000};
 
-    char generavimaas;
+  /*  char generavimaas;
     cout << "Ar norite generuoti failus [t/n]: " << endl;
     cin >> generavimaas;
 
@@ -110,8 +110,8 @@
         cout << endl;
         studentu.clear(); // Išvalome sąrašą
     }
-
-    PasirinktiVeiksma(studentai);
+    Studentas studentas;
+    studentas.PasirinktiVeiksma(studentai);
 }
 
 
@@ -125,7 +125,7 @@
 }
 */
 
-    void NuskaitytiVisusFailusListo(list<Studentas>& studentu) {
+ /*   void NuskaitytiVisusFailusListo(list<Studentas>& studentu) {
         const list<int> studentCounts = {1000, 10000, 100000, 1000000, 10000000};
 
         for (int StudKiekis : studentCounts) {
@@ -135,8 +135,8 @@
     }
 
 
-    void GeneravimasListu(list<Studentas>& studentu) {
-    const list<int> studentCounts = {1000, 10000, 100000, 1000000/*, 10000000*/};
+  /*  void GeneravimasListu(list<Studentas>& studentu) {
+    const list<int> studentCounts = {1000, 10000, 100000, 1000000/*, 10000000};
 
     for (int StudKiekis : studentCounts) {
         auto start = high_resolution_clock::now();
@@ -203,7 +203,7 @@
         studentu.clear();  // Isvalo saras
     }
 }
-
+/*
 
 void NuskaitytiDuomenisListo(const string& FailoPava, std::list<Studentas>& studentu) {
     int temp;
@@ -249,7 +249,7 @@ void NuskaitytiDuomenisListo(const string& FailoPava, std::list<Studentas>& stud
         cout << e.what() << endl;
     }
 }
-
+/*
 
     void RikiavimoMeniuListo(list<Studentas>& studentu, list<Studentas>& vargsiuku, list<Studentas>& kietiaku, int Pasirinkimas, int Tvarka) {
         if (Pasirinkimas == 1 && Tvarka == 1) {
@@ -283,7 +283,7 @@ void NuskaitytiDuomenisListo(const string& FailoPava, std::list<Studentas>& stud
             kietiaku.sort(CompareByBalas1);
         }
     }
-
+/*
 
 void RikiuotiStudentuss(list<Studentas>& studentu, list<Studentas>& vargsiuku) {
     for (auto it = studentu.begin(); it != studentu.end();) {
@@ -317,3 +317,4 @@ void IsvestiDuomenisListo(const list<Studentas>& studentu, const string& FailoPa
         cout << "Nepavyko atidaryti failo:  " << FailoPava << endl;
     }
 }
+*/
