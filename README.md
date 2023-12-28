@@ -12,3 +12,7 @@
 2.3 v1.5 realizuota abstrakti klasė Zmogus, bandant kurti jos objektą, gauname klaidą: cannot declare variable 'zmogus' to be of abstract type 'Zmogus'|
 
  ![image](https://github.com/UgnePleseviciute/AntraNaujaiNaujai/assets/145859423/2b5c49a0-6593-4c50-86c6-24edb63790eb)
+
+2.4 v2.0 sukurta dokumentacija ir pateiktas CMakeLists.txt failas įdiegimui.
+  file:///C:/Users/Lenovo/Desktop/c++/V1.5Naujai/html/index.html
+       
